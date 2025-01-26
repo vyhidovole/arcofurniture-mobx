@@ -1,7 +1,17 @@
-import React from "react";
+import React,{ useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Modal from "@/components/Modal/Modal"; // Импортируем модальное окно
 const Header = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для модального окна
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true); // Открываем модальное окно
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // Закрываем модальное окно
+  };
     return ( <div className="container flex justify-between pt-4">
         <Image
           src={"/images/logo.jpg"}
@@ -13,7 +23,7 @@ const Header = () => {
         
         <div>
           <p>ул.Московская 144 корп.-1</p>
-          <button className="text-red-500 underline">
+          <button className="text-red-500 underline"onClick={handleOpenModal}>
             Схема проезда
           </button>
         </div>
@@ -108,6 +118,7 @@ const Header = () => {
             </div>
           </Link>
         </div>
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal} /> {/* Добавляем модальное окно */}
         </div> );
 }
  
