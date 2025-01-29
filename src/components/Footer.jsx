@@ -10,7 +10,11 @@ const Footer = () => {
 
                 <div 
                 className="flex-container inline-flex flex-col">
-                <Image src={"/images/logo.jpg"} alt="арко" width={167} height={30} priority={true} />
+                <Image src={"/images/logo.jpg"} 
+                alt="арко" 
+                width={167} 
+                height={30}
+                priority={true} />
                 <h3
                  className="title-footer text-white bold pb-4 mt-6">8-961-925-6161
                  </h3>
@@ -31,7 +35,11 @@ const Footer = () => {
                 className="title-footer text-white bold pb-4 mt-6">Мы в Инстограмме
                 </h3>
                 <a
-                 href=""><Image src={"/images/inst.jpg"} alt="арко" width={80} height={80} priority={true} />
+                 href=""><Image src={"/images/inst.jpg"} 
+                 alt="арко"
+                  width={80}
+                   height={80} 
+                   priority={true} />
                  </a>
                 <a 
                 className="text-sm font-thin text-white mt-4 " href="#">© Все права защищены.
