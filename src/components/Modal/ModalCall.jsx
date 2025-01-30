@@ -1,7 +1,7 @@
 import React, { useRef, useEffect,useState } from "react";
 
 const ModalCall = ({ isOpen, onClose }) => {
-    const dialogRef = useRef(null); // Исправлено имя переменной
+    const dialogRef = useRef(null); 
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     // Используем useRef для открытия/закрытия модалки
@@ -16,9 +16,7 @@ const ModalCall = ({ isOpen, onClose }) => {
     const handleSubmit = (event) => {
         event.preventDefault(); // Предотвращаем перезагрузку страницы
     
-        
-    
-        // Создаем объект с данными для отправки
+         // Создаем объект с данными для отправки
         const formData = {
             name: name,
             phone: phone,
@@ -34,14 +32,22 @@ const ModalCall = ({ isOpen, onClose }) => {
 
     
         // Закрываем модальное окно
-        onClose();
+         onClose();
+         
+    };
+     // Обработчик клика для закрытия модалки
+     const handleBackgroundClick = (e) => {
+        if (e.target === dialogRef.current) {
+            onClose();
+        }
     };
 
     return (
-        <div className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center ${isOpen ? 'block' : 'hidden'}`}>
-            <dialog ref={dialogRef}>
-                <form onSubmit={handleSubmit} method="dialog">
-                    <div className="bg-white p-4  shadow-lg w-72 h-96 flex flex-col rounded-xl">
+        <div className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center ${isOpen ? 'block' : 'hidden'}`}onClick={handleBackgroundClick} // Добавляем обработчик клика
+         >
+            <dialog ref={dialogRef}className="rounded-xl">
+                <form onSubmit={handleSubmit} method="dialog" >
+                    <div className="bg-white p-4  shadow-lg w-72 h-96 flex flex-col "onClick={(e) => e.stopPropagation()}>{/* Останавливаем всплытие клика на модалке */}
                         {/* Заголовок Модального окна */}
                         <div className="flex justify-between items-center bottom-4 ">
                             <h3 className="font-bold">Заказать звонок</h3>
@@ -100,7 +106,7 @@ const ModalCall = ({ isOpen, onClose }) => {
                             />
                             <button 
                             type="submit"
-                            className="with=full p-4 bg-slate-600 text-white rounded-xl mt-6 "onClick={handleSubmit}>Отправить</button>
+                            className="with=full p-4 bg-slate-600 text-white rounded-xl mt-6 ">Отправить</button>
                             <p className="text-xs text-center mt-6">Отправляя форму, я даю свое согласие на  обработку моих персональных данных.</p>
                         </div>
 
