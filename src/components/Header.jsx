@@ -12,12 +12,12 @@ const Header = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false); // Закрываем модальное окно
   };
-  const [isDialogOpen, setDalogOpen]= useState(false)// Состояние для втрого модального окна
+  const [isDialogOpen, setDialogOpen]= useState(false)// Состояние для втрого модального окна
   const openDialog = ()=>{
-    setDalogOpen(true)
+    setDialogOpen(true)
   }
 const closeDialog = ()=>{
-  setDalogOpen(false)
+  setDialogOpen(false)
 }
 
  
@@ -55,7 +55,7 @@ const closeDialog = ()=>{
           </svg>
           <div>
             <h4 className="">8(961)5259191</h4>
-            <button className="border-red-500 border-2 text-red-500 rounded pl-2 pr-2 hover:"onClick={openDialog}>
+            <button className="border-red-500 border-2 text-red-500 rounded pl-2 pr-2 hover:bg-gray-200"onClick={openDialog}>
               Заказать звонок
             </button>
         
