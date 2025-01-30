@@ -1,10 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App'; // Ваш корневой компонент
 
-ReactDOM.render(
+import React from 'react';
+import ReactDOM from 'react-dom/client'; // Import createRoot instead of ReactDOM
+import App from './App';
+
+const container = document.getElementById('app'); // Get the root container
+const root = ReactDOM.createRoot(container); // Create a root
+
+// Render the App component
+root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root') // Элемент, куда будет рендериться приложение
+  </React.StrictMode>
 );
