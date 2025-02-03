@@ -3,8 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Modal from "@/components/Modal/Modal"; // Импортируем модальное окно
 import ModalCall from "@/components/Modal/ModalCall"; // Импортируем модальное окно
+import ModalEntry from "@/components/Modal/ModalEntry";// Импортируем диалоговое окно
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для модального окна
+  const [isCallModalOpen, setCallModalOpen] = useState(false); // Состояние для ModalCall
+  const [isEntryModalOpen, setEntryModalOpen] = useState(false); // Состояние для ModalEntry
   const handleOpenModal = () => {
     setIsModalOpen(true); // Открываем модальное окно
   };
@@ -12,13 +15,22 @@ const Header = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false); // Закрываем модальное окно
   };
-  const [isDialogOpen, setDialogOpen]= useState(false)// Состояние для втрого модального окна
-  const openDialog = ()=>{
-    setDialogOpen(true)
-  }
-const closeDialog = ()=>{
-  setDialogOpen(false)
-}
+
+const openCallDialog = () => {
+  setCallModalOpen(true); // Открываем модальное окно для заказа звонка
+};
+
+const closeCallDialog = () => {
+  setCallModalOpen(false); // Закрываем модальное окно для заказа звонка
+};
+
+const openEntryDialog = () => {
+  setEntryModalOpen(true); // Открываем модальное окно для входа
+};
+
+const closeEntryDialog = () => {
+  setEntryModalOpen(false); // Закрываем модальное окно для входа
+};
 
  
     return ( <div className="container flex justify-between pt-4">
@@ -55,15 +67,15 @@ const closeDialog = ()=>{
           </svg>
           <div>
             <h4 className="">8(961)5259191</h4>
-            <button className="border-red-500 border-2 text-red-500 rounded pl-2 pr-2 hover:bg-gray-200"onClick={openDialog}>
+            <button className="border-red-500 border-2 text-red-500 rounded pl-2 pr-2 hover:bg-gray-200"onClick={openCallDialog}>
               Заказать звонок
             </button>
         
           </div>
         </div>
         <div className="flex gap-5">
-          <Link href="/Components">
-            <div>
+          
+            <button type="button"className="entry"onClick={openEntryDialog}>
               <svg
                 data-slot="icon"
                 fill="none"
@@ -81,11 +93,10 @@ const closeDialog = ()=>{
                 ></path>
               </svg>
               <p className="hover:underline">Войти</p>
-            </div>
-          </Link>
-          <Link className="" href="">
-            <div>
-              <svg
+            </button>
+         
+            <button type="button"className="favorites">
+               <svg
                 data-slot="icon"
                 fill="none"
                 strokeWidth="1.5"
@@ -102,11 +113,10 @@ const closeDialog = ()=>{
                 ></path>
               </svg>
               <p className="hover:underline">Избранное</p>
-            </div>
-          </Link>
-          <Link href="">
-            {" "}
-            <div>
+            </button>
+         
+          
+            <button type="button" className="basket">
               <svg
                 data-slot="icon"
                 fill="none"
@@ -124,11 +134,12 @@ const closeDialog = ()=>{
                 ></path>
               </svg>
               <p className="hover:underline">Корзина</p>
-            </div>
-          </Link>
+            </button>
+          
         </div>
         <Modal isOpen={isModalOpen} onClose={handleCloseModal} /> {/* Добавляем модальное окно */}
-        <ModalCall isOpen={isDialogOpen} onClose={closeDialog} />{/* Добавляем модальное окно */}
+        <ModalCall isOpen={isCallModalOpen} onClose={closeCallDialog} />{/* Добавляем модальное окно */}
+        <ModalEntry show={isEntryModalOpen} onClose={closeEntryDialog} />{/* Добавляем модальное окно */}
         </div> );
 }
  
