@@ -106,8 +106,10 @@ const ModalCall = ({ isOpen, onClose }) => {
                             />
                             <button 
                             type="submit"
-                            className="with=full p-4 bg-slate-600 text-white rounded-xl mt-6 ">Отправить</button>
-                            <p className="text-xs text-center mt-6">Отправляя форму, я даю свое согласие на  обработку моих персональных данных.</p>
+                            className="with-full p-4 bg-slate-600 text-white rounded-xl mt-6 ">Отправить
+                            </button>
+                            <p className="text-xs text-center mt-6">Отправляя форму, я даю свое согласие на  обработку моих персональных данных.
+                            </p>
                         </div>
 
                     </div>
