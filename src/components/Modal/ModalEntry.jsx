@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 const ModalEntry = ({ show, onClose }) => {
+    const router = useRouter();
     const dialogRef = useRef(null)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -81,7 +83,7 @@ const ModalEntry = ({ show, onClose }) => {
                             required
                             className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 mt-5"
                         />
-                        <Link href="" className="mt-6 cursor-pointer"><p>Забыли пароль?</p></Link>
+                        <Link href="/forgot-password" className="mt-6 cursor-pointer"><p>Забыли пароль?</p></Link>
                         <button
                             type="submit"
                             className="with-full p-4 bg-slate-600 text-white rounded-xl mt-6 cursor-pointer">Войти
@@ -89,7 +91,7 @@ const ModalEntry = ({ show, onClose }) => {
                         <div className=" flex justify-between  items-center">
                             <p className="text-base text-center mt-6 ">Нет аккаунта?
                             </p>
-                            <Link href="" className="mt-6 cursor-pointer">
+                            <Link href="/account-page" className="mt-6 cursor-pointer">
                                 <p >Создать</p>
                             </Link>
                         </div>
