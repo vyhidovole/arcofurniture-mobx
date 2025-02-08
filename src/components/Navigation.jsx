@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 /* пункты меню в шапке */
 const navItems = [
-  { name: "Components", path: "/" },
+  { name: "Главная", path: "/" },
   { name: "Акции", path: "/Actions" },
   { name: "Сборка", path: "/Assembling" },
   { name: "Оплата", path: "/Payment" },
