@@ -52,7 +52,7 @@ const ModalEntry = ({ show, onClose }) => {
 
 
     return (
-        <div className={`fixed inset-0 flex justify-center items-center ${show ? 'block' : 'hidden'}`} onClick={handleBackgroundClick} // Добавляем обработчик клика
+        <div className={`fixed inset-0 flex justify-center z-10 items-center ${show ? 'block' : 'hidden'}`} onClick={handleBackgroundClick} // Добавляем обработчик клика
         >
             <dialog ref={dialogRef} className="rounded-xl">
 
