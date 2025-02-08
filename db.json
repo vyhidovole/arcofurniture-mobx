@@ -1,0 +1,57 @@
+{
+    "Products":[
+    {
+       "id": "1",
+       "name": "Мори кровать КРМ 900.1",
+       "category": "Lounge",
+       "color":  ["#808080", "#FF5733", "#33FF57"], 
+       "price": "5017 руб",
+        "imgSrc":"/images/KPM.jpg"
+          
+    },
+    {
+        "id": "2",
+        "name": "Мори кровать КРМ 900.1",
+        "category": "Lounge",
+         "color": ["#808080", "#FF5733", "#33FF57"],
+         "price": "5017 руб",
+         "imgSrc":"/images/KPM.jpg"
+           
+     },
+     {
+        "id": "3",
+        "name": "Мори кровать КРМ 900.1",
+        "category": "Lounge",
+         "color": ["#808080", "#FF5733", "#33FF57"],
+         "price": "5017 руб",
+         "imgSrc":"/images/KPM.jpg"
+           
+     },
+     {
+        "id": "4",
+        "name": "Мори кровать КРМ 900.1",
+        "category": "Lounge",
+         "color": ["#808080", "#FF5733", "#33FF57"],
+         "price": "5017 руб",
+         "imgSrc":"/images/KPM.jpg"
+           
+     },
+     {
+        "id": "5",
+        "name": "Мори кровать КРМ 900.1",
+        "category": "Lounge",
+         "color": ["#808080", "#FF5733", "#33FF57"],
+         "price": "5017 руб",
+         "imgSrc":"/images/KPM.jpg"
+           
+     },
+     {
+        "id": "6",
+        "name": "Мори кровать КРМ 900.1",
+        "category": "Lounge",
+         "color": ["#808080", "#FF5733", "#33FF57"],
+         "price": "5017 руб",
+         "imgSrc":"/images/KPM.jpg"
+           
+     }
+]}
