@@ -4,7 +4,7 @@
        "id": "1",
        "name": "Мори кровать КРМ 900.1",
        "category": "Lounge",
-       "color":  ["#808080", "#FF5733", "#33FF57"], 
+       "color":  ["#808080", "#e19a44", "#6c4925"], 
        "price": "5017 руб",
         "imgSrc":"/images/KPM.jpg"
           
@@ -13,7 +13,7 @@
         "id": "2",
         "name": "Мори кровать КРМ 900.1",
         "category": "Lounge",
-         "color": ["#808080", "#FF5733", "#33FF57"],
+         "color": ["#808080", "#e19a44", "#6c4925"],
          "price": "5017 руб",
          "imgSrc":"/images/KPM.jpg"
            
@@ -22,7 +22,7 @@
         "id": "3",
         "name": "Мори кровать КРМ 900.1",
         "category": "Lounge",
-         "color": ["#808080", "#FF5733", "#33FF57"],
+         "color": ["#808080", "#e19a44", "#6c4925"],
          "price": "5017 руб",
          "imgSrc":"/images/KPM.jpg"
            
@@ -31,7 +31,7 @@
         "id": "4",
         "name": "Мори кровать КРМ 900.1",
         "category": "Lounge",
-         "color": ["#808080", "#FF5733", "#33FF57"],
+         "color": ["#808080", "#e19a44", "#6c4925"],
          "price": "5017 руб",
          "imgSrc":"/images/KPM.jpg"
            
@@ -40,7 +40,7 @@
         "id": "5",
         "name": "Мори кровать КРМ 900.1",
         "category": "Lounge",
-         "color": ["#808080", "#FF5733", "#33FF57"],
+         "color": ["#808080", "#e19a44", "#6c4925"],
          "price": "5017 руб",
          "imgSrc":"/images/KPM.jpg"
            
@@ -49,9 +49,60 @@
         "id": "6",
         "name": "Мори кровать КРМ 900.1",
         "category": "Lounge",
-         "color": ["#808080", "#FF5733", "#33FF57"],
+         "color": ["#808080", "#e19a44", "#6c4925"],
          "price": "5017 руб",
          "imgSrc":"/images/KPM.jpg"
            
      }
-]}
+],
+"CatalogueProducts":[
+    {
+        "id": "1",
+        "name": "кухни",
+        "imgSrc":"/images/catalog1.jpg"
+        
+    },
+    {
+        "id": "2",
+        "name": "гостиные",
+        "imgSrc":"/images/Group2.jpg"
+        
+    },
+    {
+        "id": "3",
+        "name": "спальни",
+        "imgSrc":"/images/catalog3.jpg"
+        
+    },
+    {
+        "id": "4",
+        "name": "прихожие",
+        "imgSrc":"/images/catalog4.jpg"
+        
+    },
+    {
+        "id": "5",
+        "name": "шкафы-купе",
+        "imgSrc":"/images/catalog5.jpg"
+        
+    },
+    {
+        "id": "6",
+        "name": "детские",
+        "imgSrc":"/images/catalog6.jpg"
+        
+    },
+    {
+        "id": "7",
+        "name": "диваны",
+        "imgSrc":"/images/catalog7.jpg"
+        
+    },
+    {
+        "id": "8",
+        "name": "столы и стулья",
+        "imgSrc":"/images/catalog8.jpg"
+        
+    }
+]
+}
