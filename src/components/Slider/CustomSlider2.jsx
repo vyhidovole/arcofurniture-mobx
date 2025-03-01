@@ -45,7 +45,7 @@ const CustomSlider2 = () => {
                         740: { slidesPerView: 3 },
                         1275: { slidesPerView: 4 },
                     }}
-                    //  pagination={{ clickable: true }}
+                    
                     pagination={{
                         clickable: true, // Allows bullets to be clickable
                         dynamicBullets: true, // Makes bullets dynamic in size
@@ -53,7 +53,7 @@ const CustomSlider2 = () => {
                 >
 
                     {products.map((item) => (
-                        <SwiperSlide key={item.id} className='bg-zinc-200 !flex justify-center items-center h-[800px]'>
+                        <SwiperSlide key={item.id} className='bg-zinc-200 !flex justify-center items-center'>
                             <div className='border-2 border-blue-500 rounded-lg overflow-hidden w-[200px] h-[250px] flex flex-col items-center'>
 
                                 <img src={item.imgSrc || '/path/to/default-image.jpg'} alt={item.name} />
@@ -68,8 +68,8 @@ const CustomSlider2 = () => {
                                                     width: '20px',
                                                     height: '20px',
                                                     backgroundColor: color,
-                                                    borderRadius: '50%',
-                                                    margin: '0 5px',
+                                                    borderRadius: '10%',
+                                                   
                                                 }}
                                             ></div>
                                         ))
@@ -97,3 +97,4 @@ const CustomSlider2 = () => {
 };
 
 export default CustomSlider2;
+
