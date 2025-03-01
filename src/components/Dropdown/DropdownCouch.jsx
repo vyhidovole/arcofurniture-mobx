@@ -1,0 +1,31 @@
+import React from "react";
+import { Button } from "@chakra-ui/react"
+import {
+  MenuContent,
+  MenuItem,
+  MenuRoot,
+  MenuTrigger,
+} from "@/components/ui/menu"
+import { IoChevronDown } from "react-icons/io5";
+
+
+// Компонент выпадающего меню для диванов
+const DropdownCouch = () => {
+  return (
+    <MenuRoot>
+      <MenuTrigger asChild>
+             <Button className= 'outline-transparent' size="sm"rightIcon={<IoChevronDown />}>
+              ДИВАНЫ
+             </Button>
+           </MenuTrigger>
+      <MenuContent className="bg-white p-5 font-light rounded-sm">
+        <MenuItem value="прямые">Прямые</MenuItem>
+        <MenuItem value="угловые">Угловые</MenuItem>
+        <MenuItem value="металл">На металлокаркасе</MenuItem>
+        <MenuItem value="кресла">Кресла</MenuItem>
+      </MenuContent>
+    </MenuRoot>
+  );
+};
+
+export default DropdownCouch;
