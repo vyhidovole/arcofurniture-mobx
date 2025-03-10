@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react";
-import mobx from "mobx-react"
-import Link from "next/link";
-import Image from "next/image";
 import catalogueStore from "@/store/CatalogueStore"
 
 
@@ -10,7 +7,8 @@ import catalogueStore from "@/store/CatalogueStore"
 const Catalogue = observer(() => {
 
   useEffect(() => {
-    catalogueStore.getProducts()
+    const url = '/CatalogueProducts'; // Определяем конечный URL
+    catalogueStore.getProducts(url)
   }, [])
   // Итерация по данным и отрисовка карточек
   const renderData =
