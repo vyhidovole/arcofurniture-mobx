@@ -5,7 +5,7 @@ import Modal from "@/components/Modal/Modal"; // Импортируем мода
 import ModalCall from "@/components/Modal/ModalCall"; // Импортируем модальное окно
 import ModalEntry from "@/components/Modal/ModalEntry";// Импортируем диалоговое окно
 import { useRouter } from 'next/router';
-
+import { Drawer } from "@/components/Drawer/Drawer";
 const Header = () => {
   const router = useRouter();
 
@@ -40,7 +40,14 @@ const Header = () => {
   const closeEntryDialog = () => {
     setEntryModalOpen(false); // Закрываем модальное окно для входа
   };
+  const [isDrowerOpen, setIsDrowerOpen] = useState(false)
 
+  const handleOpenDrower = () => {
+    setIsDrowerOpen(true)
+  }
+  const handleCloseDrower = () => {
+    setIsDrowerOpen(false)
+  }
 
   return (<div className="container flex justify-between pt-4">
     <Image
@@ -104,7 +111,7 @@ const Header = () => {
         <p className="hover:underline">Войти</p>
       </button>
 
-      <Link href="FavoritePage"className="mt-1">
+      <Link href="FavoritePage" className="mt-1">
 
         <svg
           data-slot="icon"
@@ -124,7 +131,8 @@ const Header = () => {
         </svg>
         <p className="hover:underline">Избранное</p>
       </Link>
-      <button type="button" className="basket">
+      <button type="button" className="basket" onClick={handleOpenDrower}>
+
         <svg
           data-slot="icon"
           fill="none"
@@ -142,12 +150,16 @@ const Header = () => {
           ></path>
         </svg>
         <p className="hover:underline">Корзина</p>
+
       </button>
 
     </div>
     <Modal isOpen={isModalOpen} onClose={handleCloseModal} /> {/* Добавляем модальное окно */}
     <ModalCall isOpen={isCallModalOpen} onClose={closeCallDialog} />{/* Добавляем модальное окно */}
     <ModalEntry show={isEntryModalOpen} onClose={closeEntryDialog} />{/* Добавляем модальное окно */}
+    <Drawer isOpen={isDrowerOpen} onClose={handleCloseDrower} titleDrawer="корзина">
+      <p>Добвленные товары</p>
+    </Drawer>{/* Добавляем корзину товаров */}
   </div>);
 }
 
