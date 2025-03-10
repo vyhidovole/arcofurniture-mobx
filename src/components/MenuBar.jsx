@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Dropdown from "../components/Dropdown/Dropdown";
 import DropdownCupboard from "../components/Dropdown/DropdownCupboard";
 import DropdownLiving from "../components/Dropdown/DropdownLiving";
@@ -20,6 +21,7 @@ const MenuBar = () => {
         <DropdownCouch></DropdownCouch>
         <DropdownLobby></DropdownLobby>
         <DropdownCupboard></DropdownCupboard>
+       
       </div>
         </div>
          
