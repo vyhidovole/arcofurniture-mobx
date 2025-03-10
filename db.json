@@ -104,5 +104,61 @@
         "imgSrc":"/images/catalog8.jpg"
         
     }
+],
+"Kitchen":[
+    {
+       "id": "1",
+       "name": "Глечер",
+       "category": "кухни",
+       "color":  ["#808080", "#e19a44", "#6c4925"], 
+       "price": "5017 руб",
+        "imgSrc":"/images/catalog1.jpg"
+          
+    },
+    {
+        "id": "2",
+        "name": "Лондон",
+        "category": "кухни",
+         "color": ["#808080", "#e19a44", "#6c4925"],
+         "price": "5017 руб",
+         "imgSrc":"/images/catalog1.jpg"
+           
+     },
+     {
+        "id": "3",
+        "name": "Амели",
+        "category": "кухни",
+         "color": ["#808080", "#e19a44", "#6c4925"],
+         "price": "5017 руб",
+         "imgSrc":"/images/catalog1.jpg"
+           
+     },
+     {
+        "id": "4",
+        "name": "Глечер",
+        "category": "кухни",
+         "color": ["#808080", "#e19a44", "#6c4925"],
+         "price": "5017 руб",
+         "imgSrc":"/images/catalog1.jpg"
+           
+     },
+     {
+        "id": "5",
+        "name": "Лондон",
+        "category": "кухни",
+         "color": ["#808080", "#e19a44", "#6c4925"],
+         "price": "5017 руб",
+         "imgSrc":"/images/catalog1.jpg"
+           
+     },
+     {
+        "id": "6",
+        "name": "Амели",
+        "category": "кухни",
+         "color": ["#808080", "#e19a44", "#6c4925"],
+         "price": "5017 руб",
+         "imgSrc":"/images/catalog1.jpg"
+           
+     }
 ]
 }
