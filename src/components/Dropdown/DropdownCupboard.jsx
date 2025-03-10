@@ -15,7 +15,7 @@ const DropdownCuboard = () => {
     <MenuRoot>
       <MenuTrigger asChild>
         <Button className= 'outline-transparent' size="sm" rightIcon={<IoChevronDown />}>
-          КУХНИ
+          ШКАФЫ-КУПЕ
         </Button>
       </MenuTrigger>
       <MenuContent className="bg-white p-5 font-light rounded-sm">
