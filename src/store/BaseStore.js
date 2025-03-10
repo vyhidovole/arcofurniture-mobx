@@ -6,6 +6,9 @@ import { makeObservable, observable, action } from "mobx";
  */
 class BaseStore {
   constructor() {
+
+    this.baseUrl = "http://localhost:3000"; // Определяем базовый URL
+  
     /**
      * Состояние загрузки.
      * @observable
