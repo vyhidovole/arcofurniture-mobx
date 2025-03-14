@@ -6,7 +6,7 @@ import catalogueStore from "@/store/CatalogueStore";
 import { useCart } from '@/context/CartContext'; 
 
 const Product = observer(({ item }) => {
-  const {  addToCart, removeFromCart } = useCart(); // Используем контекст
+  const {  addToCart, removeFromCart,deleteProduct } = useCart(); // Используем контекст
   useEffect(() => {
     catalogueStore.initializeBasket(); // Инициализация корзины после монтирования
   }, []);
@@ -24,7 +24,10 @@ const Product = observer(({ item }) => {
       removeFromCart()
     }
   };
- 
+  const handleDeleteProduct = () => {
+    deleteProduct(quantity); // Вызываем deleteProduct из контекста
+    catalogueStore.clearProduct(id); // Также вызываем метод из store для удаления товара
+};
   const numericPrice = parseFloat(price); // Преобразуем в число
 
   const total = (numericPrice * catalogueStore.basket.find(product => product.id === id)?.quantity || 0).toFixed(2);
@@ -81,7 +84,8 @@ const Product = observer(({ item }) => {
         </div>
         <button 
           className="mt-2 bg-gray-300 text-gray-800 font-bold py-1 px-2 rounded hover:bg-gray-400" // Отступ сверху для кнопки удаления
-          onClick={() => catalogueStore.clearProduct(id)}
+          // onClick={() => catalogueStore.clearProduct(id)}
+          onClick={handleDeleteProduct}
         >
           <VscTrash />
         </button>

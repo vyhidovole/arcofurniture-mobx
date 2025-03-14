@@ -1,6 +1,6 @@
 import BaseStore from "./BaseStore";
 import { makeObservable, observable, action, runInAction } from "mobx";
-import { useCart } from '@/context/CartContext';
+
 /**
  * Класс для управления состоянием товаров.
  */

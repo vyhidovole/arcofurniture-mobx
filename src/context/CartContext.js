@@ -16,10 +16,12 @@ export const CartProvider = ({ children }) => {
         setCount(prevCount => Math.max(prevCount - 1, 0)); // Уменьшаем количество товаров, не меньше 0
     };
 
-    
+    const deleteProduct = (quantity) => { // Переименовали clearProduct в deleteProduct
+        setCount(prevCount => Math.max(prevCount - quantity, 0));
+    };
 
     return (
-        <CartContext.Provider value={{ count, addToCart, removeFromCart }}>
+        <CartContext.Provider value={{ count, addToCart, removeFromCart,deleteProduct }}>
             {children}
         </CartContext.Provider>
     );
