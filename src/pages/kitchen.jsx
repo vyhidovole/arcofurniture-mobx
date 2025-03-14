@@ -3,9 +3,10 @@ import React, { useEffect,useState } from "react";
 import { observer } from "mobx-react-lite";
 import catalogueStore from "@/store/CatalogueStore"; 
 import Alert from "@/components/Alert/Alert";
- 
+import { useCart } from '@/context/CartContext'; 
 
 const Kitchen = observer(() => { 
+   const {  addToCart } = useCart(); // Используем контекст
   // Стейт для закрытия компонента уведомления
   const [isShowAlert, setShowAlert] = useState(false);
   useEffect(() => {
@@ -16,6 +17,7 @@ const Kitchen = observer(() => {
   // Функция для добавления товара в корзину
   const handleAddToBasket = (item) => {
     catalogueStore.addProductToBasket(item); // Добавляем продукт в корзину
+    addToCart()
     console.log(`${item.name} добавлен в корзину!`);
     setShowAlert(true); // Показываем алерт
     console.log("Показать алерт:", true); // Логируем изменение состояния
@@ -66,17 +68,18 @@ const Kitchen = observer(() => {
         </div>
         <p>{item.price || 'Нет цены'}</p>
         <button
-          className="text-white bg-sky-800   px-6 py-1 rounded-sm " onClick={() => handleAddToBasket(item)} >
+          className="text-white bg-sky-800   px-6 py-1 rounded-sm "
+           onClick={() => handleAddToBasket(item)} >
           купить
         </button>
       </div>
     ));
-  
+    console.log("Текущая корзина:", catalogueStore.basket);
     console.log(catalogueStore.products); // Логируем продукты для отладки
+    console.log("Количество уникальных товаров в корзине:", catalogueStore.quantity); // Логируем количество уникальных товаров
 
     return (
-      
-     <>
+      <>
      <div className="grid grid-cols-4 gap-6 relative ">
         {renderData}
       </div>

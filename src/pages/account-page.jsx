@@ -1,15 +1,19 @@
 import React, { useState, } from "react"
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Password from "./forgot-password";
+import Alert from "@/components/Alert/Alert";
+
 
 
 const Account = () => {
     const router = useRouter();
     //создаем один объект состоянияformData
     const [formData, setFormdata] = useState({ name: '', tel: '', email: '', password: '', confirmation: '' })
+     const [alertVisible, setAlertVisible] = useState(false);
+        const [alertMessage, setAlertMessage] = useState('');
+        const [alertVariant, setAlertVariant] = useState('info');
     const handleChange = (e) => {
-        const { name, value } = e.target//получакм имч и значение поля
+        const { name, value } = e.target//получаем имя и значение поля
         setFormdata({ ...formData, [name]: value })// обновляем только нужное поле
     }
     const handleSubmit = (event) => {
@@ -19,7 +23,16 @@ const Account = () => {
         console.log('Данные сохранены в localStorage:', formData)
         //очищаем поля формы, устанавливаем начальное состояние
         setFormdata({ name: '', tel: '', email: '', password: '', confirmation: '' })
+
+         // Устанавливаем сообщение и показываем Alert
+       setAlertMessage("Вы успешно зарегистрировались");
+       setAlertVariant('positive'); // Установите нужный вариант
+       setAlertVisible(true); 
+       setTimeout(()=>{
+        setAlertVisible(false)
+       },3000) 
     }
+    
 
     return (
         <>
@@ -29,7 +42,13 @@ const Account = () => {
                 -
                 <p className="text-base ml-1">Быстрая регистрация</p>
             </div>
-
+            <Alert 
+                isOpen={alertVisible} 
+                
+                variant={alertVariant}
+            >
+                {alertMessage}
+            </Alert>
             <form
                 onSubmit={handleSubmit}
                 method="dialog"

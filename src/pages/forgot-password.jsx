@@ -1,11 +1,16 @@
 import React, { useState, } from "react"
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Alert from "@/components/Alert/Alert";
 
 
 const Password = () => {
-     const router = useRouter();
+    //  const router = useRouter();
     const [email, setEmail] = useState('')
+    const [alertVisible, setAlertVisible] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertVariant, setAlertVariant] = useState('info');
+    
     const handleChange=(e)=>setEmail(e.target.value)
 
     const handleSubmit = (event) => {
@@ -21,15 +26,23 @@ const Password = () => {
        
        //очищаем поле
        setEmail('')
-       setTimeout(()=>{
-         alert("Новый пароль был выслан на ваш адрес электронной почты.")
-       },0)
+    //    setTimeout(()=>{
+    //      alert("Новый пароль был выслан на ваш адрес электронной почты.")
+    //    },0)
        
-         
+       // Устанавливаем сообщение и показываем Alert
+       setAlertMessage("Новый пароль был выслан на ваш адрес электронной почты.");
+       setAlertVariant('positive'); // Установите нужный вариант
+       setAlertVisible(true); 
+       setTimeout(()=>{
+        setAlertVisible(false)
+       },3000) 
 
     }
 
-
+    const handleCloseAlert = () => {
+        setAlertVisible(false);
+    };
     return (
         <>
             <h2 className="text-3xl font-semibold ">Забыли пароль?</h2>
@@ -40,7 +53,13 @@ const Password = () => {
                 <p className="text-base ml-1">Забыли пароль?</p>
             </div>
 
-
+            <Alert 
+                isOpen={alertVisible} 
+                onClose={handleCloseAlert} 
+                variant={alertVariant}
+            >
+                {alertMessage}
+            </Alert>
 
             <form
                 onSubmit={handleSubmit}

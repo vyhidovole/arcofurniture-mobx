@@ -20,7 +20,7 @@ const PrivetOffice = () => {
 
             </div>
             
-            <ModalPrivetOffice show={isEntryModalOpen} onClose={closeEntryDialog} />{/* Добавляем модальное окно */}
+            <ModalPrivetOffice show={isEntryModalOpen} onClose={closeEntryDialog} />{/* Добавляем форму */}
 
         </>
 
