@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-
 import catalogueStore from "@/store/CatalogueStore"; // Импортируйте ваше MobX хранилище
 import Product from "./Product/Product";
 
