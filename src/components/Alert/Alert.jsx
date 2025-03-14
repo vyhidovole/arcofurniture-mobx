@@ -5,7 +5,7 @@ import {
   FaExclamationCircle,
   FaTimesCircle,
 } from "react-icons/fa";
-import { LiaTimesSolid } from "react-icons/lia";
+
 
 /**
  * Компонент уведомления.
@@ -58,9 +58,7 @@ const Alert = ({ variant = "neutral", children, isOpen, onClose }) => {
         className={`flex items-center ${variantClasses[variant]} fixed top-4 left-1/2 transform -translate-x-1/2 w-96 px-3 py-2 rounded-md z-50`}
         role="alert"
       >
-        <button onClick={closeAlert}>
-          <LiaTimesSolid />
-        </button>
+       
         <div className="">{iconVariant[variant]}</div>
         <div>{children}</div>
       </div>
