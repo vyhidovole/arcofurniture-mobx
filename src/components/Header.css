@@ -1,0 +1,46 @@
+
+.underline-animation {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .underline-animation::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px; /* Толщина подчеркивания */
+    background-color: #000; /* Цвет подчеркивания */
+    transform: scaleX(0);
+    transform-origin: bottom left;
+    transition: transform 0.3s ease; /* Плавный переход */
+  }
+  
+  .underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  /* стили  для навигации */
+.nav-link {
+  position: relative; /* Для позиционирования псевдоэлемента */
+  text-decoration: none; /* Убираем стандартное подчеркивание */
+  color: inherit; /* Унаследовать цвет текста */
+}
+
+.nav-link::after {
+  content: ''; /* Псевдоэлемент для подчеркивания */
+  position: absolute; /* Абсолютное позиционирование */
+  left: 0; /* Начинаем с левого края */
+  bottom: 0; /* Позиционируем внизу */
+  width: 100%; /* Ширина равна ширине текста */
+  height: 2px; /* Высота подчеркивания */
+  background-color: #3b82f6; /* Цвет подчеркивания (синий) */
+  transform: scaleX(0); /* Изначально скрыто */
+  transition: transform 0.3s ease; /* Плавный переход */
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1); /* Показать подчеркивание при наведении */
+}
