@@ -14,16 +14,19 @@ const Catalogue = observer(() => {
   const renderData =
     catalogueStore.products.length > 0 &&
     catalogueStore.products.map((item) => (
-      <div key={item.id} className='relative border-2 border-blue-500 rounded-lg w-[250px] h-[168px]
+      <div key={item.id} className='relative border-2 border-blue-500 rounded-lg w-[250px] h-[185px] overflow-hidden
        '>
 
-        <img src={item.imgSrc || '/path/to/default-image.jpg'}
-         alt={item.name}
-         className="absolute rounded-lg"
-         
-       />
+        <img
+          src={item.imgSrc || '/path/to/default-image.jpg'}
+          alt={item.name}
+           className="absolute inset-0 w-full h-full object-cover"
+          
+
+        />
+        
         <button
-          className="text-white bg-sky-800 absolute  px-6 py-1 rounded-sm top-28 left-5 ">
+          className="text-white bg-sky-800 absolute px-6 py-1 rounded-sm bottom-0 left-0">
           {item.name}
         </button>
       </div>
@@ -31,7 +34,7 @@ const Catalogue = observer(() => {
 
 
   return (
-    <div className="grid grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {renderData}
     </div>
   );
