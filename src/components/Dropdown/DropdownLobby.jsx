@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@chakra-ui/react"
+import Link from "next/link";
 import {
   MenuContent,
   MenuItem,
@@ -20,7 +21,9 @@ const DropdownLobby = () => {
               </Button>
             </MenuTrigger>
       <MenuContent className="bg-white p-5 font-light rounded-sm">
+      <Link href="/hallway" passHref>
         <MenuItem value="модульные">Модульные</MenuItem>
+        </Link>
         <MenuItem value="обувницы">Обувницы</MenuItem>
       </MenuContent>
    </MenuRoot>

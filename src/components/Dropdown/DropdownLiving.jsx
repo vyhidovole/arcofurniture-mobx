@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@chakra-ui/react"
+import Link from "next/link"
 import {
   MenuContent,
   MenuItem,
@@ -14,12 +15,14 @@ const DropdownLiving = () => {
   return (
     <MenuRoot>
       <MenuTrigger asChild>
-              <Button className= 'outline-transparent' size="sm"rightIcon={<IoChevronDown />}>
-               ГОСТИНЫЕ
-              </Button>
-            </MenuTrigger>
+        <Button className='outline-transparent' size="sm" rightIcon={<IoChevronDown />}>
+          ГОСТИНЫЕ
+        </Button>
+      </MenuTrigger>
       <MenuContent className="bg-white p-5 font-light rounded-sm">
-        <MenuItem value="модульные">Модульные</MenuItem>
+        <Link href="/drawing-room" passHref>
+          <MenuItem value="модульные">Модульные</MenuItem>
+        </Link>
         <MenuItem value="комплекты">Готовые комплекты</MenuItem>
         <MenuItem value="столы">Журнальные столы</MenuItem>
         <MenuItem value="полки">Полки</MenuItem>
