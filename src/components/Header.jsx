@@ -1,5 +1,5 @@
 import React, { useState, } from "react";
-import { useCart } from '@/context/CartContext'; 
+import { useCart } from '@/context/CartContext';
 import Image from "next/image";
 import Link from "next/link";
 import Modal from "@/components/Modal/Modal"; // Импортируем модальное окно
@@ -7,6 +7,9 @@ import ModalCall from "@/components/Modal/ModalCall"; // Импортируем 
 import ModalEntry from "@/components/Modal/ModalEntry";// Импортируем диалоговое окно
 import { useRouter } from 'next/router';
 import { Drawer } from "@/components/Drawer/Drawer";
+import '@/components/Header.css';
+import BurgerButton from "@/components/BurgerButton";
+import { BurgerMenu } from "@/components/BurgerMenu";
 const Header = () => {
   const { count } = useCart(); // Используем контекст
   const router = useRouter();
@@ -19,6 +22,9 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для модального окна
   const [isCallModalOpen, setCallModalOpen] = useState(false); // Состояние для ModalCall
   const [isEntryModalOpen, setEntryModalOpen] = useState(false); // Состояние для ModalEntry
+  const [isDrowerOpen, setIsDrowerOpen] = useState(false)
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false)
+
   const handleOpenModal = () => {
     setIsModalOpen(true); // Открываем модальное окно
   };
@@ -42,7 +48,7 @@ const Header = () => {
   const closeEntryDialog = () => {
     setEntryModalOpen(false); // Закрываем модальное окно для входа
   };
-  const [isDrowerOpen, setIsDrowerOpen] = useState(false)
+
 
   const handleOpenDrower = () => {
     setIsDrowerOpen(true)
@@ -51,7 +57,20 @@ const Header = () => {
     setIsDrowerOpen(false)
   }
 
+
+
+  const handleOpenBurger = () => {
+    setIsBurgerOpen(true)
+    console.log("бургер меню открыто")
+  }
+  const handleCloseBurger = () => {
+    setIsBurgerOpen(false)
+    console.log("бургер меню закрыто")
+  }
+
   return (<div className="container flex justify-between pt-4">
+    <BurgerButton onClick={handleOpenBurger} />
+    <BurgerMenu isOpen={isBurgerOpen} onClose={handleCloseBurger} titleBurger="меню" />
     <Image
       src={"/images/logo.jpg"}
       alt="арко"
@@ -60,13 +79,13 @@ const Header = () => {
       priority={true}
     />
 
-    <div>
+    <div className="hidden lg:block">
       <p>ул.Московская 144 корп.-1</p>
       <button className="text-red-500 underline" onClick={handleOpenModal}>
         Схема проезда
       </button>
     </div>
-    <div className="flex">
+    <div className="hidden lg:flex">
       <svg
         data-slot="icon"
         fill="none"
@@ -91,9 +110,9 @@ const Header = () => {
 
       </div>
     </div>
-    <div className="flex gap-5">
+    <div className="flex gap-5 ">
 
-      <button type="button" className="entry" onClick={openEntryDialog}>
+      <button type="button" className="entry hidden lg:block" onClick={openEntryDialog}>
         <svg
           data-slot="icon"
           fill="none"
@@ -110,7 +129,8 @@ const Header = () => {
             d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
           ></path>
         </svg>
-        <p className="hover:underline">Войти</p>
+        <p className="underline-animation">Войти</p>
+
       </button>
 
       <Link href="FavoritePage" className="mt-1">
@@ -131,40 +151,41 @@ const Header = () => {
             d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
           ></path>
         </svg>
-        
-        <p className="hover:underline">Избранное</p>
+
+        <p className="underline-animation">Избранное</p>
       </Link>
       <div>
-      <button type="button" className="basket relative mt-1" onClick={handleOpenDrower}>
+        <button type="button" className="basket relative mt-1" onClick={handleOpenDrower}>
 
-<svg
-  data-slot="icon"
-  fill="none"
-  strokeWidth="1.5"
-  stroke="currentColor"
-  viewBox="0 0 24 24"
-  xmlns="http://www.w3.org/2000/svg"
-  className="h-5 w-5 "
-  aria-hidden="true"
->
-  <path
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-  ></path>
-</svg>
+          <svg
+            data-slot="icon"
+            fill="none"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 "
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+            ></path>
+          </svg>
 
-<p className="hover:underline">Корзина</p>
-<span className="absolute top-0 right-5 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-{count} {/* Отображаем количество товаров в корзине */}
-  </span> 
-</button>
-   
+          <p className="underline-animation">Корзина</p>
+          <span className="absolute top-0 right-5 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+            {count} {/* Отображаем количество товаров в корзине */}
+          </span>
+        </button>
+
       </div>
-      
-      
+
+
 
     </div>
+
     <Modal isOpen={isModalOpen} onClose={handleCloseModal} /> {/* Добавляем модальное окно */}
     <ModalCall isOpen={isCallModalOpen} onClose={closeCallDialog} />{/* Добавляем модальное окно */}
     <ModalEntry show={isEntryModalOpen} onClose={closeEntryDialog} />{/* Добавляем модальное окно */}
