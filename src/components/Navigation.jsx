@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import '@/components/Header.css';
 
 /* пункты меню в шапке */
 const navItems = [
@@ -36,7 +37,7 @@ const Navigation = () => {
           {navItems.slice(0, 5).map((item) => (
             <a
               onClick={() => onClickHandler(item.name,item.path)}//передаем путь
-              className={`cursor-pointer ${
+              className={`nav-link cursor-pointer ${
                 item.name === activeLink ? "text-sky-500" : ""
               }`}
               key={item.path}
@@ -51,7 +52,7 @@ const Navigation = () => {
           {navItems.slice(5).map((item) => (
             <a
               onClick={() => onClickHandler(item.name, item.path)}
-              className={`cursor-pointer ${
+              className={`nav-link cursor-pointer ${
                 item.name === activeLink ? "text-sky-500" : ""
               }`}
               key={item.path}
