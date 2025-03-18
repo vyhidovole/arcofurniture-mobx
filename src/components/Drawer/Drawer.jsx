@@ -56,7 +56,7 @@ export const Drawer = ({ isOpen, onClose,  titleDrawer }) => {
       <div className="fixed w-full h-full top-0 left-0 right-0 bottom-0 bg-opacity-50 bg-black">
         <aside
           ref={drawerRef}
-          className={`absolute h-full w-96 p-8 bg-gray-300 transition-transform duration-300 ease-in-out`}
+          className={`absolute max-h-full h-full w-96 p-8 bg-gray-300 transition-transform duration-300 ease-in-out overflow-y-auto`}
         >
           <header className="flex justify-between mb-4">
             <h2 className="text-xl font-bold">{titleDrawer}</h2>
