@@ -12,7 +12,7 @@ import DropdownLobby from "../components/Dropdown/DropdownLobby";
 const MenuBar = () => {
     return ( 
         <>
-        <div className=" flex justify-around w-full h-14 bg-teal-500 py-4 my-2 font-bold relative mb-6">
+        <div className="hidden lg:flex justify-around w-full h-14 bg-teal-500 py-4 my-2 font-bold relative mb-6">
         <div className=" flex justify-around w-3/4">
         <Dropdown></Dropdown>
         <DropdownLiving></DropdownLiving>
