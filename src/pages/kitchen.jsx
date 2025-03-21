@@ -80,7 +80,7 @@ const Kitchen = observer(() => {
 
     return (
       <>
-     <div className="grid grid-cols-4 gap-6 relative ">
+     <div className="grid grid-cols-2 gap-6 relative lg:grid lg:grid-cols-4 lg:gap-6 ">
         {renderData}
       </div>
       {isShowAlert && (

@@ -52,8 +52,8 @@ const Account = () => {
             <form
                 onSubmit={handleSubmit}
                 method="dialog"
-                className="flex-wrap">
-                <div className="inline-flex flex-col">
+                className="sm:inline-flex flex-col lg:flex-wrap">
+                <div className="inline-flex flex-col m-6">
                     <label htmlFor="">ФИО</label>
                     <input
                         type="text"
