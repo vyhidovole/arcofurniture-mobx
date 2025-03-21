@@ -2,24 +2,28 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const ModalEntry = ({ show, onClose }) => {
+const ModalEntry = ({ show, onClose}) => {
+   
     const router = useRouter();
     const dialogRef = useRef(null)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    //Используем useRef для открытия/закрытия диалогового окна
+   
+
     useEffect(() => {
-
         if (show) {
-            dialogRef.current.show()
+            dialogRef.current.show();
+            document.addEventListener('mousedown', handleBackgroundClick);
         } else {
-            dialogRef.current.close()
+            dialogRef.current.close();
+            document.removeEventListener('mousedown', handleBackgroundClick);
         }
-    }, [show])
 
-
-
+        return () => {
+            document.removeEventListener('mousedown', handleBackgroundClick);
+        };
+    }, [show]);
 
     const handleSubmit = (event) => {
         event.preventDefault() //предотвращаем перезагрузку страницы
@@ -57,7 +61,7 @@ const ModalEntry = ({ show, onClose }) => {
             <dialog ref={dialogRef} className="rounded-xl">
 
                 <form onSubmit={handleSubmit} method="dialog" >
-                    <div className="bg-white p-4  shadow-lg w-72 h-96 flex flex-col " onClick={(e) => e.stopPropagation()}>{/* Останавливаем всплытие клика на модалке */}
+                    <div className="bg-white p-4  shadow-lg w-11/12 md:w-3/4 lg:w-72 h-96 flex flex-col " onClick={(e) => e.stopPropagation()}>{/* Останавливаем всплытие клика на модалке */}
                         {/* Заголовок Модального окна */}
                         <div className=" bottom-4 text-4xl ml-16">
                             <h1 className="font-bold ">Войти</h1>
@@ -83,7 +87,7 @@ const ModalEntry = ({ show, onClose }) => {
                             required
                             className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 mt-5"
                         />
-                        <Link href="/forgot-password" className="mt-6 cursor-pointer"onClick={onClose}><p>Забыли пароль?</p></Link>
+                        <Link href="/forgot-password" className="mt-6 cursor-pointer" onClick={onClose}><p>Забыли пароль?</p></Link>
                         <button
                             type="submit"
                             className="with-full p-4 bg-slate-600 text-white rounded-xl mt-6 cursor-pointer">Войти
