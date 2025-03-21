@@ -36,10 +36,9 @@ const Navigation = () => {
         <nav className="flex items-center gap-5">
           {navItems.slice(0, 5).map((item) => (
             <a
-              onClick={() => onClickHandler(item.name,item.path)}//передаем путь
-              className={`nav-link cursor-pointer ${
-                item.name === activeLink ? "text-sky-500" : ""
-              }`}
+              onClick={() => onClickHandler(item.name, item.path)}//передаем путь
+              className={`nav-link cursor-pointer ${item.name === activeLink ? "text-sky-500" : ""
+                }`}
               key={item.path}
             >
               {item.name}
@@ -52,9 +51,8 @@ const Navigation = () => {
           {navItems.slice(5).map((item) => (
             <a
               onClick={() => onClickHandler(item.name, item.path)}
-              className={`nav-link cursor-pointer ${
-                item.name === activeLink ? "text-sky-500" : ""
-              }`}
+              className={`nav-link cursor-pointer ${item.name === activeLink ? "text-sky-500" : ""
+                }`}
               key={item.path}
             >
               {item.name}
