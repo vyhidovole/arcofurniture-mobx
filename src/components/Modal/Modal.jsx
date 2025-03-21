@@ -46,6 +46,7 @@ const Modal = ({ isOpen, onClose }) => {
             width={808} height={100}
             alt="map"
             priority={true}
+            className='object-cover overflow-hidden'
           />
         </div>
 
