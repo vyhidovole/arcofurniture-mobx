@@ -1,5 +1,6 @@
 import React, { useState, } from "react";
 import { useCart } from '@/context/CartContext';
+import { useTheme } from '@/context/ThemeContext';
 import Image from "next/image";
 import Link from "next/link";
 import Modal from "@/components/Modal/Modal"; // Импортируем модальное окно
@@ -10,7 +11,10 @@ import { Drawer } from "@/components/Drawer/Drawer";
 import '@/components/Header.css';
 import BurgerButton from "@/components/BurgerButton";
 import { BurgerMenu } from "@/components/BurgerMenu";
+
+
 const Header = () => {
+ 
   const { count } = useCart(); // Используем контекст
   const router = useRouter();
 
@@ -174,7 +178,7 @@ const Header = () => {
             ></path>
           </svg>
 
-          <p className="underline-animation">Корзина</p>
+          <p className="underline-animation ">Корзина</p>
           <span className="absolute top-0 right-5 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
             {count} {/* Отображаем количество товаров в корзине */}
           </span>
@@ -188,7 +192,7 @@ const Header = () => {
 
     <Modal isOpen={isModalOpen} onClose={handleCloseModal} /> {/* Добавляем модальное окно */}
     <ModalCall isOpen={isCallModalOpen} onClose={closeCallDialog} />{/* Добавляем модальное окно */}
-    <ModalEntry show={isEntryModalOpen} onClose={closeEntryDialog} />{/* Добавляем модальное окно */}
+    <ModalEntry show={isEntryModalOpen} onClose={closeEntryDialog}  />{/* Добавляем модальное окно */}
     <Drawer isOpen={isDrowerOpen} onClose={handleCloseDrower} titleDrawer="корзина">
       <p>Добвленные товары</p>
     </Drawer>{/* Добавляем корзину товаров */}
