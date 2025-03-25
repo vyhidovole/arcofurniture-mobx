@@ -14,7 +14,7 @@ import { BurgerMenu } from "@/components/BurgerMenu";
 
 
 const Header = () => {
- 
+  const { isDarkMode } = useTheme(); // Получаем доступ к теме
   const { count } = useCart(); // Используем контекст
   const router = useRouter();
 
@@ -193,7 +193,7 @@ const Header = () => {
     <Modal isOpen={isModalOpen} onClose={handleCloseModal} /> {/* Добавляем модальное окно */}
     <ModalCall isOpen={isCallModalOpen} onClose={closeCallDialog} />{/* Добавляем модальное окно */}
     <ModalEntry show={isEntryModalOpen} onClose={closeEntryDialog}  />{/* Добавляем модальное окно */}
-    <Drawer isOpen={isDrowerOpen} onClose={handleCloseDrower} titleDrawer="корзина">
+    <Drawer isOpen={isDrowerOpen} onClose={handleCloseDrower} isDarkMode={isDarkMode} titleDrawer="корзина">
       <p>Добвленные товары</p>
     </Drawer>{/* Добавляем корзину товаров */}
   </div>);

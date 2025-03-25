@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useTheme } from '@/context/ThemeContext';
 import Link from "next/link";
 import Alert from "../Alert/Alert";
 import useForm from "@/hooks/useForm";
@@ -7,6 +8,7 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 
 const ModalEntry = ({ show, onClose, setNewForm }) => {
+     const { isDarkMode } = useTheme(); // Получаем доступ к теме
     const { formData, errors, handleChange, handleSubmit, resetForm } = useForm(
         {
             name: "",
@@ -77,7 +79,7 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
             <dialog ref={dialogRef} className="rounded-xl">
                 <form onSubmit={handleFormSubmit} method="dialog">
                     <div
-                        className={` bg-white p-4 shadow-lg w-11/12 md:w-3/4 lg:w-72 h-96 flex flex-col`}
+                        className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} p-4 shadow-lg w-11/12 md:w-3/4 lg:w-72 h-auto flex flex-col`}
                         onClick={(e) => e.stopPropagation()} // Останавливаем всплытие клика на модалке
                     >
                         {/* Заголовок Модального окна */}
