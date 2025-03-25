@@ -4,10 +4,15 @@ import ModalPrivetOffice from "@/components/Modal/ModalPrivetOffice";
 
 const PrivetOffice = () => {
     const [isEntryModalOpen, setEntryModalOpen] = useState(true); // Состояние для ModalPrivetOffice
+    const [userData, setUserData] = useState(null); // Хранение данных пользователя
 
 
     const closeEntryDialog = () => {
         setEntryModalOpen(false); // Закрываем модальное окно для входа
+    };
+    const handleSetUserData = (data) => {
+        setUserData(data); // Обновляем состояние с данными пользователя
+        console.log("Данные пользователя:", data); // Логируем данные
     };
     return (
         <>
@@ -20,7 +25,11 @@ const PrivetOffice = () => {
 
             </div>
             
-            <ModalPrivetOffice show={isEntryModalOpen} onClose={closeEntryDialog} />{/* Добавляем форму */}
+            <ModalPrivetOffice 
+            show={isEntryModalOpen} 
+            onClose={closeEntryDialog}
+            setNewState={handleSetUserData} 
+             />{/* Добавляем форму */}
 
         </>
 
