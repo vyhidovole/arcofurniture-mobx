@@ -2,11 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --foreground-rgb: 0, 0, 0; /* Цвет текста для светлой темы */
+  --background-rgb: 255, 255, 255; /* Цвет фона для светлой темы */
+  --link-color: 0, 0, 255; /* Цвет ссылок для светлой темы */
+  --link-hover-color: 0, 0, 139; /* Цвет ссылок при наведении для светлой темы */
+  
+}
+
+[data-theme='dark'] {
+  --foreground-rgb: 255, 255, 255; /* Цвет текста для темной темы */
+  --background-rgb: 0, 0, 0; /* Цвет фона для темной темы */
+  --link-color:  255, 255, 255; /* Цвет ссылок для темной темы */
+  --link-hover-color: 255, 255, 255; /* Цвет ссылок при наведении для темной темы */
+  --link-active-color: 107, 158, 216;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-rgb));
 }
 
 .container {
   width: 1230px;
   margin: 0 auto;
+  
 }
+[data-theme='dark'] a:active {
+  color: rgb(var(--link-active-color)); /* Цвет для активной ссылки в темной теме */
+}
+[data-theme='dark'] a {
+  color: rgb(var(--link-color));
+  transition: color 0.3s ease; /* Плавный переход цвета */
+}
+
+[data-theme='dark'] a:hover {
+  color: rgb(var(--link-hover-color)); /* Цвет при наведении */
+}
+
