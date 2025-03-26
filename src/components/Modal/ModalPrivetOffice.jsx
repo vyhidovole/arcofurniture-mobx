@@ -6,14 +6,15 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 
 const ModalPrivetOffice = ({ setNewState }) => {
-    const { formData, errors, handleChange, handleSubmit,resetForm } = useForm({
+    const { formData, errors, handleChange, handleSubmit, resetForm } = useForm({
         name: "",
         email: "",
         password: "",
     }, setNewState);
 
     const [isShowAlert, setShowAlert] = useState(false);
-    
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertVariant, setAlertVariant] = useState('info');
 
     const handleFormSubmit = async (e) => {
         e.preventDefault(); // Предотвращаем перезагрузку страницы
@@ -24,15 +25,33 @@ const ModalPrivetOffice = ({ setNewState }) => {
         // Если форма успешно отправлена и нет ошибок
         if (isSuccess && Object.keys(errors).length === 0) {
             localStorage.setItem('userData', JSON.stringify(formData));
-           
+
             setShowAlert(true);
             resetForm(); // Сбрасываем форму
             setTimeout(() => {
                 setShowAlert(false);
             }, 3000); // Закрываем алерт через 3 секунды
+        } else {
+            // Устанавливаем сообщение и показываем Alert
+            setAlertMessage("Данные введены не корректно.");
+            setAlertVariant('negative'); // Установите нужный вариант
+            setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false)
+            }, 3000)
+            return
         }
+        // Устанавливаем сообщение и показываем Alert
+        setAlertMessage("Регисрация прошла успешно.");
+        setAlertVariant('positive'); // Установите нужный вариант
+        setShowAlert(true);
+        setTimeout(() => {
+            setShowAlert(false)
+        }, 3000)
     };
-
+    const handleCloseAlert = () => {
+        setShowAlert(false);
+    };
     return (
         <form onSubmit={handleFormSubmit} method="dialog" >
             <div className="${isDarkMode ? 'bg-gray-800' : 'bg-white'}p-4  shadow-lg w-72 h-96 flex flex-col mt-6 " >
@@ -74,7 +93,8 @@ const ModalPrivetOffice = ({ setNewState }) => {
                 </Link>
                 <Button
                     type="submit"
-                    variant="secondary">Отправить
+                    variant="secondary"
+                    className="mt-6">Отправить
                 </Button>
 
                 <div className=" flex justify-between  items-center">
@@ -84,21 +104,28 @@ const ModalPrivetOffice = ({ setNewState }) => {
                     </Link>
 
                 </div>
-                {isShowAlert && (
+
+                {isShowAlert ? (
                     <Alert
-                        variant="positive"
+                        variant={alertVariant}
                         isOpen={isShowAlert}
-                        onClose={setTimeout(() => setShowAlert(false), 3000)}
+                        onClose={handleCloseAlert}
                     >
-                        <h2>Авторизация прошла успешно!</h2>
-                        <p>Вы авторизированны!</p>
+                        {alertMessage}
+                    </Alert>
+                ) : (
+                    <Alert
+                        variant={alertVariant} // Или другой вариант, который вы хотите использовать
+                        isOpen={isShowAlert} // Убедитесь, что это условие правильно
+                        onClose={handleCloseAlert}
+
+                    >
+                        {alertMessage}
                     </Alert>
                 )}
             </div>
 
         </form>
-
-
     );
 }
 

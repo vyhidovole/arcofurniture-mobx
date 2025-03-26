@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { useTheme } from '@/context/ThemeContext';
 import Link from "next/link";
 import Alert from "../Alert/Alert";
@@ -7,8 +6,9 @@ import useForm from "@/hooks/useForm";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 
+
 const ModalEntry = ({ show, onClose, setNewForm }) => {
-     const { isDarkMode } = useTheme(); // Получаем доступ к теме
+    const { isDarkMode } = useTheme(); // Получаем доступ к теме
     const { formData, errors, handleChange, handleSubmit, resetForm } = useForm(
         {
             name: "",
@@ -18,9 +18,11 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
         setNewForm
     );
 
-    const router = useRouter();
+    // const router = useRouter();
     const dialogRef = useRef(null);
     const [isShowAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertVariant, setAlertVariant] = useState('info');
 
     useEffect(() => {
         if (show) {
@@ -46,29 +48,43 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
         }
     };
 
+    
     const handleFormSubmit = async (e) => {
-        e.preventDefault(); // Предотвращаем перезагрузку страницы
+        e.preventDefault();
+// Проверка наличия ошибок
+
         // Проверяем наличие ошибок
-        if (Object.keys(errors).length === 0) {
-            // Если нет ошибок, отправляем данные
-            const isSuccess = await handleSubmit(e); // Предполагается, что handleSubmit возвращает true/false
-
-            // Если форма успешно отправлена и нет ошибок
-            if (isSuccess) {
-                localStorage.setItem("userData", JSON.stringify(formData));
-
-                setShowAlert(true);
-                resetForm(); // Сбрасываем форму
-
-                setTimeout(() => {
-                    setShowAlert(false);
-                    onClose();
-                }, 3000); // Закрываем алерт через 3 секунды
-            }
-        } else {
-            // Если есть ошибки, вы можете обработать это здесь
-            console.error("Форма содержит ошибки:", errors);
+        if (Object.keys(errors).length > 0) {
+            console.log("Ошибка: данные введены некорректно");
+            console.log("Ошибки:", errors);
+            setAlertMessage("Данные введены не корректно.");
+            setAlertVariant('negative');
+            setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false);
+            }, 3000);
+            return; // Выход из функции, если есть ошибки
         }
+
+        // Если нет ошибок, отправляем данные
+        const isSuccess = await handleSubmit(e);
+
+        if (isSuccess) {
+            localStorage.setItem("userData", JSON.stringify(formData));
+            setAlertMessage("Регистрация прошла успешно.");
+            setAlertVariant('positive');
+            setShowAlert(true);
+            resetForm();
+
+            setTimeout(() => {
+                setShowAlert(false);
+                onClose();
+            }, 3000);
+        }
+    };
+
+    const handleCloseAlert = () => {
+        setShowAlert(false);
     };
 
     return (
@@ -127,14 +143,14 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
 
                         {isShowAlert && (
                             <Alert
-                                variant="positive"
+                                variant={alertVariant}
                                 isOpen={isShowAlert}
-                                onClose={() => setTimeout(() => setShowAlert(false), 3000)} // Передаем функцию
+                                onClose={handleCloseAlert}
                             >
-                                <h2>Авторизация прошла успешно!</h2>
-                                <p>Вы авторизированны!</p>
+                                {alertMessage}
                             </Alert>
                         )}
+                       
                     </div>
                 </form>
             </dialog>
