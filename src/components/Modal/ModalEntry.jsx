@@ -23,7 +23,7 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
     const [isShowAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertVariant, setAlertVariant] = useState('info');
-
+    const [isLoading, setIsLoading] = useState(false); // Состояние загрузки
 
     useEffect(() => {
         if (show) {
@@ -52,6 +52,8 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        // Устанавливаем состояние загрузки перед отправкой
+        setIsLoading(true);
 
         // Если нет ошибок, отправляем данные
         const isSuccess = await handleSubmit(e);
@@ -67,6 +69,8 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
                 setShowAlert(false);
                 onClose();
             }, 3000);
+            setIsLoading(false); // Сбрасываем состояние загрузки
+
         } else {
             // Устанавливаем сообщение и показываем Alert
             setAlertMessage("Данные введены не корректно.");
@@ -75,7 +79,9 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
             setTimeout(() => {
                 setShowAlert(false)
             }, 3000)
+            setIsLoading(false); // Сбрасываем состояние загрузки
             return
+
         }
 
     };
@@ -89,6 +95,7 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
     console.log("Form Data:", formData);
     console.log("Errors:", errors);
     console.log("Is Form Valid:", isFormValid);
+
 
     return (
         <div
@@ -144,7 +151,9 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
                         <Button
                             type="submit"
                             variant="secondary"
+
                             disabled={!isFormValid} // Делаем кнопку недоступной, если форма не валидна
+                            isLoading={isLoading} // Передаём состояние загрузки
                         >
                             Отправить
                         </Button>
