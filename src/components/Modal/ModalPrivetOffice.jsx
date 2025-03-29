@@ -15,15 +15,16 @@ const ModalPrivetOffice = ({ setNewState }) => {
     const [isShowAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertVariant, setAlertVariant] = useState('info');
+    const [isLoading, setIsLoading] = useState(false); // Состояние загрузки
 
     const handleFormSubmit = async (e) => {
         e.preventDefault(); // Предотвращаем перезагрузку страницы
-
+        setIsLoading(true); // Устанавливаем состояние загрузки
         // Вызываем handleSubmit из useForm для отправки данных
         const isSuccess = await handleSubmit(e); // Предполагается, что handleSubmit возвращает true/false
 
         // Если форма успешно отправлена и нет ошибок
-        if (isSuccess && Object.keys(errors).length === 0) {
+        if (isSuccess) {
             localStorage.setItem('userData', JSON.stringify(formData));
 
             setShowAlert(true);
@@ -39,6 +40,7 @@ const ModalPrivetOffice = ({ setNewState }) => {
             setTimeout(() => {
                 setShowAlert(false)
             }, 3000)
+            setIsLoading(false); // Сбрасываем состояние загрузки
             return
         }
         // Устанавливаем сообщение и показываем Alert
@@ -48,6 +50,7 @@ const ModalPrivetOffice = ({ setNewState }) => {
         setTimeout(() => {
             setShowAlert(false)
         }, 3000)
+        setIsLoading(false); // Сбрасываем состояние загрузки
     };
     const handleCloseAlert = () => {
         setShowAlert(false);
@@ -89,12 +92,14 @@ const ModalPrivetOffice = ({ setNewState }) => {
                     error={errors.password}
                 />
 
-                <Link href="/forgot-password" className="mt-6 cursor-pointer"><p>Забыли пароль?</p>
+                <Link href="/forgot-password" className="m-6 cursor-pointer"><p>Забыли пароль?</p>
                 </Link>
                 <Button
                     type="submit"
                     variant="secondary"
-                    className="mt-6">Отправить
+                    className="mt-6"
+                    isLoading={isLoading} // Передаём состояние загрузки
+                >Отправить
                 </Button>
 
                 <div className=" flex justify-between  items-center">

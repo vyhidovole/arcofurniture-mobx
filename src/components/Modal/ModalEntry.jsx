@@ -9,7 +9,7 @@ import Button from "../Button/Button";
 
 const ModalEntry = ({ show, onClose, setNewForm }) => {
     const { isDarkMode } = useTheme(); // Получаем доступ к теме
-    const { formData, errors, handleChange, handleSubmit, resetForm } = useForm(
+    const { formData, errors, handleChange, handleBlur, handleSubmit, resetForm } = useForm(
         {
             name: "",
             email: "",
@@ -18,11 +18,12 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
         setNewForm
     );
 
-    // const router = useRouter();
+
     const dialogRef = useRef(null);
     const [isShowAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertVariant, setAlertVariant] = useState('info');
+
 
     useEffect(() => {
         if (show) {
@@ -48,23 +49,9 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
         }
     };
 
-    
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-// Проверка наличия ошибок
-
-        // Проверяем наличие ошибок
-        if (Object.keys(errors).length > 0) {
-            console.log("Ошибка: данные введены некорректно");
-            console.log("Ошибки:", errors);
-            setAlertMessage("Данные введены не корректно.");
-            setAlertVariant('negative');
-            setShowAlert(true);
-            setTimeout(() => {
-                setShowAlert(false);
-            }, 3000);
-            return; // Выход из функции, если есть ошибки
-        }
 
         // Если нет ошибок, отправляем данные
         const isSuccess = await handleSubmit(e);
@@ -80,12 +67,28 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
                 setShowAlert(false);
                 onClose();
             }, 3000);
+        } else {
+            // Устанавливаем сообщение и показываем Alert
+            setAlertMessage("Данные введены не корректно.");
+            setAlertVariant('negative'); // Установите нужный вариант
+            setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false)
+            }, 3000)
+            return
         }
+
     };
 
     const handleCloseAlert = () => {
         setShowAlert(false);
     };
+    const isFormValid = Object.keys(errors).length === 0 && formData.name && formData.email && formData.password;
+
+
+    console.log("Form Data:", formData);
+    console.log("Errors:", errors);
+    console.log("Is Form Valid:", isFormValid);
 
     return (
         <div
@@ -131,13 +134,18 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
+                            // onBlur={handleBlur} // Используем обработчик из useForm
                             error={errors.password}
                         />
                         <Link href="/forgot-password" className="mt-6 cursor-pointer" onClick={onClose}>
                             <p>Забыли пароль?</p>
                         </Link>
 
-                        <Button type="submit" variant="secondary">
+                        <Button
+                            type="submit"
+                            variant="secondary"
+                            disabled={!isFormValid} // Делаем кнопку недоступной, если форма не валидна
+                        >
                             Отправить
                         </Button>
 
@@ -150,7 +158,7 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
                                 {alertMessage}
                             </Alert>
                         )}
-                       
+
                     </div>
                 </form>
             </dialog>
