@@ -1,6 +1,6 @@
 import { BiLoaderAlt } from "react-icons/bi";
 import { cn } from "@/utils/class-merge";
-// import { cn } from "../../../utils/class-merge";
+
 
 /**
  * Компонент кнопки.
