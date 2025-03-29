@@ -18,7 +18,7 @@ const Password = (setNewState) => {
     const [alertMessage, setAlertMessage] = useState('');
     const [alertVariant, setAlertVariant] = useState('info');
     const [isLoading, setIsLoading] = useState(false); // Состояние загрузки
-    // const handleChange = (e) => setEmail(e.target.value)
+    
     const handleFormSubmit = async (e) => {
         e.preventDefault(); // Предотвращаем перезагрузку страницы
         setIsLoading(true); // Устанавливаем состояние загрузки
@@ -58,6 +58,8 @@ const Password = (setNewState) => {
     const handleCloseAlert = () => {
         setShowAlert(false);
     };
+    const isFormValid = Object.keys(errors).length === 0  && formData.email ;
+
     return (
         <>
             <h2 className="text-3xl font-semibold ">Забыли пароль?</h2>
@@ -78,7 +80,6 @@ const Password = (setNewState) => {
 
             <form
                 onSubmit={handleFormSubmit}
-                // onSubmit={handleSubmit}
                 method="dialog"
             >
                 <div className="inline-flex flex-col mt-6">
@@ -100,6 +101,7 @@ const Password = (setNewState) => {
                     <Button
                         type="submit"
                         variant="secondary"
+                        disabled={!isFormValid}
                         isLoading={isLoading} // Передаём состояние загрузки
                     >
                         Отправить
