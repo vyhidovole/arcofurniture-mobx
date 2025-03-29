@@ -33,19 +33,20 @@ function useForm(initialState, setNewState) {
     setFormData(updatedFormData);
 
     // Валидируем только текущее поле
-    // const validationErrors = {
-    //   ...errors,
-    //   [name]: validateForm({ [name]: value })[name],
-    // };
+    const validationErrors = {
+      ...errors,
+      [name]: validateForm({ [name]: value })[name],
+    };
     // Валидируем всю форму
-    const validationErrors = validateForm(updatedFormData); // Используйте обновленные данные
+    // const validationErrors = validateForm(updatedFormData); // Используйте обновленные данные
 
-    // Обновляем состояние ошибок
+    // // Обновляем состояние ошибок
     setErrors(validationErrors);
 
     console.log('Обновленное состояние формы:', updatedFormData);
     console.log('Ошибки после изменения:', validationErrors);
   };
+ 
 
   /**
    * Обработчик при отправке данных
@@ -60,9 +61,10 @@ function useForm(initialState, setNewState) {
    
     // Проверка наличия ошибок
     const validationErrors = validateForm(formData);
-    setErrors(validationErrors); // Устанавливаем ошибки
+    // setErrors(validationErrors); // Устанавливаем ошибки
 
     if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors); // Устанавливаем ошибки
       console.log("Форма содержит ошибки:", validationErrors);
       return false; // Возвращаем false, если есть ошибки
     }
@@ -97,7 +99,9 @@ function useForm(initialState, setNewState) {
 
       // Очистить форму
       resetForm();
+      return true;  
     }
+    
     // Имитация отправки данных
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -106,7 +110,7 @@ function useForm(initialState, setNewState) {
       }, 2000); // Задержка 2 секунды
     });
 
-
+    
   };
 
   /**
@@ -116,14 +120,16 @@ function useForm(initialState, setNewState) {
     setFormData(initialState);
     setErrors({});
   };
-
+  
   return {
     formData,
     errors,
     handleChange,
+    // handleBlur,
     handleSubmit,
     resetForm,
   };
+  
 }
 
 export default useForm;
