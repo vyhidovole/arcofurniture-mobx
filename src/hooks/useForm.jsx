@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { validateForm } from "../utils/validators";
 
+
 /**
  * Хук для управления состоянием формы, валидацией и обработки отправки данных.
  *
@@ -24,29 +25,48 @@ function useForm(initialState, setNewState) {
    *
    * @param {Event} e - Объект события изменения данных на элементе формы
    */
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
   const handleChange = (e) => {
-    // Извлекаем имя поля и его новое значение из события
     const { name, value } = e.target;
 
-     // Обновляем состояние формы для текущего поля
-    const updatedFormData = { ...formData, [name]: value };
-    setFormData(updatedFormData);
+    setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Валидируем только текущее поле
-    // const validationErrors = {
-    //   ...errors,
-    //   [name]: validateForm({ [name]: value })[name],
-    // };
-    // Валидируем всю форму
-    const validationErrors = validateForm(updatedFormData); // Используйте обновленные данные
+    // Валидация для каждого поля
+    let newErrors = { ...errors }; // Копируем текущее состояние ошибок
 
-    // // Обновляем состояние ошибок
-    setErrors(validationErrors);
+    switch (name) {
+      case 'name':
+        if (value.trim() === '') {
+          newErrors.name = 'Имя обязательно';
+        } else {
+          delete newErrors.name; // Удаляем ошибку, если поле корректно заполнено
+        }
+        break;
+      case 'email':
+        if (!validateEmail(value)) {
+          newErrors.email = 'Некорректный email';
+        } else {
+          delete newErrors.email; // Удаляем ошибку, если поле корректно заполнено
+        }
+        break;
+      case 'password':
+        if (value.length < 8) {
+          newErrors.password = 'Пароль должен содержать минимум 8 символов';
+        } else {
+          delete newErrors.password; // Удаляем ошибку, если поле корректно заполнено
+        }
+        break;
+      default:
+        break;
+    }
 
-    console.log('Обновленное состояние формы:', updatedFormData);
-    console.log('Ошибки после изменения:', validationErrors);
+    // Обновляем состояние ошибок
+    setErrors(newErrors);
   };
- 
 
   /**
    * Обработчик при отправке данных
@@ -58,11 +78,11 @@ function useForm(initialState, setNewState) {
     // Логируем состояние перед отправкой
     console.log('Состояние формы перед отправкой:', formData);
     console.log('Ошибки перед отправкой:', errors);
-   
+
     // Проверка наличия ошибок
     const validationErrors = validateForm(formData);
+   
     // setErrors(validationErrors); // Устанавливаем ошибки
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors); // Устанавливаем ошибки
       console.log("Форма содержит ошибки:", validationErrors);
@@ -99,9 +119,9 @@ function useForm(initialState, setNewState) {
 
       // Очистить форму
       resetForm();
-       
+
     }
-    
+
     // Имитация отправки данных
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -110,7 +130,7 @@ function useForm(initialState, setNewState) {
       }, 2000); // Задержка 2 секунды
     });
 
-    
+
   };
 
   /**
@@ -120,16 +140,15 @@ function useForm(initialState, setNewState) {
     setFormData(initialState);
     setErrors({});
   };
-  
+
   return {
     formData,
     errors,
     handleChange,
-    // handleBlur,
     handleSubmit,
     resetForm,
   };
-  
+
 }
 
 export default useForm;
