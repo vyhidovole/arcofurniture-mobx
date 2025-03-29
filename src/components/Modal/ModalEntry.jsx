@@ -9,7 +9,7 @@ import Button from "../Button/Button";
 
 const ModalEntry = ({ show, onClose, setNewForm }) => {
     const { isDarkMode } = useTheme(); // Получаем доступ к теме
-    const { formData, errors, handleChange, handleBlur, handleSubmit, resetForm } = useForm(
+    const { formData, errors, handleChange, handleSubmit, resetForm } = useForm(
         {
             name: "",
             email: "",

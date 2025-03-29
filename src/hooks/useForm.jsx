@@ -33,12 +33,12 @@ function useForm(initialState, setNewState) {
     setFormData(updatedFormData);
 
     // Валидируем только текущее поле
-    const validationErrors = {
-      ...errors,
-      [name]: validateForm({ [name]: value })[name],
-    };
+    // const validationErrors = {
+    //   ...errors,
+    //   [name]: validateForm({ [name]: value })[name],
+    // };
     // Валидируем всю форму
-    // const validationErrors = validateForm(updatedFormData); // Используйте обновленные данные
+    const validationErrors = validateForm(updatedFormData); // Используйте обновленные данные
 
     // // Обновляем состояние ошибок
     setErrors(validationErrors);
@@ -99,7 +99,7 @@ function useForm(initialState, setNewState) {
 
       // Очистить форму
       resetForm();
-      return true;  
+       
     }
     
     // Имитация отправки данных
