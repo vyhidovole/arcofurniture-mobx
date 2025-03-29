@@ -17,16 +17,16 @@ const Password = (setNewState) => {
     const [isShowAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertVariant, setAlertVariant] = useState('info');
-
+    const [isLoading, setIsLoading] = useState(false); // Состояние загрузки
     // const handleChange = (e) => setEmail(e.target.value)
     const handleFormSubmit = async (e) => {
         e.preventDefault(); // Предотвращаем перезагрузку страницы
-
+        setIsLoading(true); // Устанавливаем состояние загрузки
         // Вызываем handleSubmit из useForm для отправки данных
         const isSuccess = await handleSubmit(e); // Предполагается, что handleSubmit возвращает true/false
 
         // Если форма успешно отправлена и нет ошибок
-        if (isSuccess && Object.keys(errors).length === 0) {
+         if(isSuccess) {
             localStorage.setItem('userData', JSON.stringify(formData));
 
             setShowAlert(true);
@@ -42,6 +42,7 @@ const Password = (setNewState) => {
             setTimeout(() => {
                 setShowAlert(false)
             }, 3000)
+            setIsLoading(false); // Сбрасываем состояние загрузки
             return
         }
         // Устанавливаем сообщение и показываем Alert
@@ -51,7 +52,7 @@ const Password = (setNewState) => {
         setTimeout(() => {
             setShowAlert(false)
         }, 3000)
-
+        setIsLoading(false); // Сбрасываем состояние загрузки
     }
 
     const handleCloseAlert = () => {
@@ -96,7 +97,11 @@ const Password = (setNewState) => {
                     <Link href="/privetofficepage" className="bg-zinc-300 px-4 py-2 rounded-lg mr-3">назад</Link>
 
                     {/* <button type="submit" className="bg-zinc-300 px-4 py-2 rounded-lg m-3">продолжить</button> */}
-                    <Button type="submit" variant="secondary">
+                    <Button
+                        type="submit"
+                        variant="secondary"
+                        isLoading={isLoading} // Передаём состояние загрузки
+                    >
                         Отправить
                     </Button>
                 </div>
