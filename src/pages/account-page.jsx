@@ -10,20 +10,22 @@ import Button from "@/components/Button/Button";
 const Account = (setNewState) => {
     
     const { formData, errors, handleChange, handleSubmit, resetForm } = useForm(
-        { name: '', tel: '', email: "", password: '', confirmation: '' }, setNewState);
+        { name: '', phone: '', email: "", password: '', confirmation: '' }, setNewState);
    
     const [isShowAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertVariant, setAlertVariant] = useState('info');
-    
+    const [isLoading, setIsLoading] = useState(false); // Состояние загрузки
     const handleFormSubmit = async (e) => {
         e.preventDefault(); // Предотвращаем перезагрузку страницы
+        setIsLoading(true); // Устанавливаем состояние загрузки
 
         // Вызываем handleSubmit из useForm для отправки данных
         const isSuccess = await handleSubmit(e); // Предполагается, что handleSubmit возвращает true/false
 
         // Если форма успешно отправлена и нет ошибок
-        if (isSuccess && Object.keys(errors).length === 0) {
+      
+          if(isSuccess)  {
             localStorage.setItem('userData', JSON.stringify(formData));
 
             setShowAlert(true);
@@ -39,6 +41,7 @@ const Account = (setNewState) => {
         setTimeout(() => {
             setShowAlert(false)
         }, 3000)
+        setIsLoading(false); // Сбрасываем состояние загрузки
         return
         }
         // Устанавливаем сообщение и показываем Alert
@@ -48,7 +51,7 @@ const Account = (setNewState) => {
         setTimeout(() => {
             setShowAlert(false)
         }, 3000)
-
+        setIsLoading(false); // Сбрасываем состояние загрузки
     }
 
     const handleCloseAlert = () => {
@@ -90,13 +93,13 @@ const Account = (setNewState) => {
                 <div className="inline-flex flex-col m-6">
                    
                     <Input
-                        className={errors.email ? "border-red-500" : ""}
+                        className={errors.phone ? "border-red-500" : ""}
                         label="Телефон"
                         type="tel"
-                        name="tel"
-                        value={formData.tel}
+                        name="phone"
+                        value={formData.phone}
                         onChange={handleChange}
-                        error={errors.tel}
+                        error={errors.phone}
                     />
                 </div>
                 <div className="inline-flex flex-col m-6">
@@ -137,7 +140,11 @@ const Account = (setNewState) => {
                 </div>
 
                 {/* <button type="submit" className="bg-blue-400 text-white p-3 rounded-md">Продолжить</button> */}
-                <Button type="submit" variant="secondary">
+                <Button 
+                type="submit" 
+                variant="secondary"
+                isLoading={isLoading} // Передаём состояние загрузки
+                >
                         Отправить
                     </Button>
             </form>
