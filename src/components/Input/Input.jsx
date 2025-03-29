@@ -111,6 +111,7 @@ const Input = ({
         onBlur={handleBlur}
         onFocus={handleFocus}
         className={inputClasses}
+        
       />
       {error && (
         <span className="text-red-500 text-xs italic mt-1">{error}</span>
