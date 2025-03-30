@@ -13,8 +13,6 @@ import { validateForm } from "../utils/validators";
 function useForm(initialState, setNewState) {
   // Состояние формы (значения полей)
   const [formData, setFormData] = useState(initialState);
-
-
   // Состояние для отслеживания ошибок валидации
   const [errors, setErrors] = useState({});
 
@@ -30,6 +28,11 @@ function useForm(initialState, setNewState) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+  const validatePhone = (phone) => {
+    const phoneRegex = /^\+?[1-9]\d{1,14}$/; // Простой пример для международного формата
+    return phoneRegex.test(phone);
+};
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -40,12 +43,18 @@ function useForm(initialState, setNewState) {
 
     switch (name) {
       case 'name':
-        if (value.trim() === '') {
-          newErrors.name = 'Имя обязательно';
-        } else {
-          delete newErrors.name; // Удаляем ошибку, если поле корректно заполнено
-        }
-        break;
+    // Проверка, что имя не пустое
+    if (value.trim() === '') {
+        newErrors.name = 'Имя обязательно';
+    } 
+    // Проверка, что имя содержит более одной буквы и состоит только из букв
+    else if (value.trim().length <= 1 || !/^[A-Za-zА-Яа-яЁё]+$/.test(value)) {
+        newErrors.name = 'Имя должно содержать более одной буквы и состоять только из букв';
+    } else {
+        delete newErrors.name; // Удаляем ошибку, если поле корректно заполнено
+    }
+    break;
+
       case 'email':
         if (!validateEmail(value)) {
           newErrors.email = 'Некорректный email';
@@ -60,6 +69,13 @@ function useForm(initialState, setNewState) {
           delete newErrors.password; // Удаляем ошибку, если поле корректно заполнено
         }
         break;
+        case 'phone':
+          if (!validatePhone(value)) {
+              newErrors.phone = 'Некорректный номер телефона';
+          } else {
+              delete newErrors.phone; // Удаляем ошибку, если поле корректно заполнено
+          }
+          break;
       default:
         break;
     }
@@ -81,7 +97,7 @@ function useForm(initialState, setNewState) {
 
     // Проверка наличия ошибок
     const validationErrors = validateForm(formData);
-   
+
     // setErrors(validationErrors); // Устанавливаем ошибки
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors); // Устанавливаем ошибки
