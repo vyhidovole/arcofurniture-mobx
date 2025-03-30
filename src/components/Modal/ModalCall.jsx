@@ -28,10 +28,13 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
         }
     }, [isOpen]);
 
+   // Обработчик клика для закрытия модалки по крестику
+    const handleClose = () => {
+        resetForm(); // Сбрасываем форму перед закрытием
+        onClose(); // Закрываем модалку
+    };
    
-   
-   
-    // Обработчик клика для закрытия модалки
+    // Обработчик внешнего клика для закрытия модалки
     const handleBackgroundClick = (e) => {
         if (e.target === dialogRef.current) {
             resetForm();
@@ -82,7 +85,7 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
                         <div className="flex justify-between items-center bottom-4 ">
                             <h3 className="font-bold">Заказать звонок</h3>
                             <button type="button"
-                                onClick={onClose}
+                                onClick={handleClose}
                                 className="border-gray-300 rounded-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path
