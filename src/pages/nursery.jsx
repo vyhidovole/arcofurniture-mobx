@@ -1,10 +1,14 @@
 import React, { useEffect,useState } from "react";
 import { observer } from "mobx-react-lite";
+import { useLoading } from '@/context/LoadingContext'; 
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import catalogueStore from "@/store/CatalogueStore"; 
 import Alert from "@/components/Alert/Alert";
 import { useCart } from '@/context/CartContext'; 
 
 const Nursery = observer(() => { 
+  const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
    const {  addToCart } = useCart(); // Используем контекст
   // Стейт для закрытия компонента уведомления
   const [isShowAlert, setShowAlert] = useState(false);
@@ -26,8 +30,12 @@ const Nursery = observer(() => {
 };
   useEffect(() => {
     const url = '/Nursery'; // Определяем конечный URL 
-    catalogueStore.getProducts(url);
-  }, []);
+    setLoading(true); // Устанавливаем состояние загрузки в true
+    catalogueStore.getProducts(url).finally(() => {
+         setLoading(false); // Устанавливаем состояние загрузки в false после завершения запроса
+       });
+     }, [setLoading]);
+ 
  
   // Итерация по данным и отрисовка карточек
   const renderData =
@@ -79,9 +87,18 @@ const Nursery = observer(() => {
 
     return (
       <>
-     <div className="grid grid-cols-2 gap-6 relative lg:grid lg:grid-cols-4 lg:gap-6 ">
-        {renderData}
-      </div>
+       <div className="grid grid-cols-2 gap-6 relative lg:grid lg:grid-cols-4 lg:gap-6 ">
+              {loading ? (
+                 // Отображение Skeleton, пока данные загружаются
+                 Array.from({ length: 8 }).map((_, index) => (
+            <div key={index} className='relative border-2 border-blue-500 rounded-lg w-[250px] h-[300px] overflow-hidden'>
+             <Skeleton height="100%" />
+             </div>
+           ))
+         ) :(
+           renderData
+         )}
+            </div>   
       {isShowAlert && (
         <Alert
           variant="positive"
