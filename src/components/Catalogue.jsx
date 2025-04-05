@@ -1,15 +1,23 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react";
 import catalogueStore from "@/store/CatalogueStore"
+import { useLoading } from '@/context/LoadingContext'; // Импортируйте хук контекста загрузки
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 
 
 const Catalogue = observer(() => {
 
+  const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
+
   useEffect(() => {
     const url = '/CatalogueProducts'; // Определяем конечный URL
-    catalogueStore.getProducts(url)
-  }, [])
+    setLoading(true); // Устанавливаем состояние загрузки в true
+    catalogueStore.getProducts(url).finally(() => {
+      setLoading(false); // Устанавливаем состояние загрузки в false после завершения запроса
+    });
+  }, [setLoading])
   // Итерация по данным и отрисовка карточек
   const renderData =
     catalogueStore.products.length > 0 &&
@@ -35,7 +43,17 @@ const Catalogue = observer(() => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {renderData}
+       {loading ? (
+        // Отображение Skeleton, пока данные загружаются
+        Array.from({ length: 8 }).map((_, index) => (
+          <div key={index} className='relative border-2 border-blue-500 rounded-lg w-[250px] h-[185px] overflow-hidden'>
+            <Skeleton height="100%" />
+          </div>
+        ))
+      ) : (
+        renderData
+      )}
+      {/* {renderData} */}
     </div>
   );
 })

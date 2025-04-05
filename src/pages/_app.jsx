@@ -5,7 +5,7 @@ import { Provider } from "@/components/ui/provider";
 import MenuBar from "@/components/MenuBar";
 import { CartProvider } from '@/context/CartContext';
 import { ThemeProvider } from '@/context/ThemeContext'; 
-
+import { LoadingProvider } from '@/context/LoadingContext';
 
 
 
@@ -13,6 +13,7 @@ import { ThemeProvider } from '@/context/ThemeContext';
 const App = ({ Component, pageProps }) => {
  
   return (
+    <LoadingProvider>
     <ThemeProvider>
       <Provider>
         <CartProvider>
@@ -23,6 +24,7 @@ const App = ({ Component, pageProps }) => {
         </CartProvider>
       </Provider>
     </ThemeProvider>
+    </LoadingProvider>
 
 
   );

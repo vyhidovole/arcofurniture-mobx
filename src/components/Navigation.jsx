@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Skeleton from 'react-loading-skeleton'; // Импортируем скелетон
+import 'react-loading-skeleton/dist/skeleton.css'; // Импортируем стили скелетона
+import { useLoading } from '@/context/LoadingContext'; // Импортируем хук useLoading
 import { useTheme } from '@/context/ThemeContext';
 import '@/components/Header.css';
 
@@ -19,6 +22,7 @@ const navItems = [
 const Navigation = () => {
 
   const { isDarkMode, toggleTheme } = useTheme(); // Получаем доступ к теме
+  const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
   // состояние (стейт) для активного пункта меню
   const [activeLink, setActiveLink] = useState("Главная");
 
@@ -34,7 +38,10 @@ const Navigation = () => {
   // клик по активному пункту меню
   const onClickHandler = (link, path) => {
     if (link !== activeLink) {
-      router.push(path);
+      setLoading(true); // Устанавливаем состояние загрузки
+      router.push(path).then(() => {
+        setLoading(false); // Отключаем состояние загрузки после перехода
+      });;
       setActiveLink(link);
     }
     console.log(activeLink)
@@ -45,7 +52,13 @@ const Navigation = () => {
       <div className="container flex justify-between">
         {/* Левая часть с первыми пятью пунктами меню */}
         <nav className="flex items-center gap-5">
-          {navItems.slice(0, 5).map((item) => (
+        {loading ? (
+            // Отображаем скелетон, пока данные загружаются
+            Array(5).fill().map((_, index) => (
+              <Skeleton key={index} width={100} height={20} />
+            ))
+          ) : (
+          navItems.slice(0, 5).map((item) => (
             <a
               onClick={() => onClickHandler(item.name, item.path)}//передаем путь
               className={`nav-link cursor-pointer
@@ -56,12 +69,20 @@ const Navigation = () => {
             >
               {item.name}
             </a>
-          ))}
+              ))
+          )}
         </nav>
 
         {/* Правая часть с последними двумя пунктами меню */}
+        
         <nav className="flex items-center gap-5">
-          {navItems.slice(5).map((item) => (
+        {loading ? (
+            // Отображаем скелетон для правой части меню
+            Array(2).fill().map((_, index) => (
+              <Skeleton key={index} width={80} height={20} />
+            ))
+          ) : (
+          navItems.slice(5).map((item) => (
             <a
               onClick={() => onClickHandler(item.name, item.path)}
               className={`nav-link cursor-pointer 
@@ -71,7 +92,8 @@ const Navigation = () => {
             >
               {item.name}
             </a>
-          ))}
+          ))
+          )}
           {/* Переключатель темы */}
           <fieldset className="relative inline-block w-16 h-8">
             <input

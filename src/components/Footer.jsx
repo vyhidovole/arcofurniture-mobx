@@ -1,8 +1,26 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Image from "next/image";
+import { useLoading } from '@/context/LoadingContext'; // Импортируем контекст загрузки
+import Skeleton from 'react-loading-skeleton'; // Импортируем скелетон
+import 'react-loading-skeleton/dist/skeleton.css'; // Импортируем стили для скелетона
 
 const Footer = () => {
+    const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
+    useEffect(() => {
+        const fetchData = async () => {
+          setLoading(true);
+          // Здесь  можно добавить логику загрузки данных
+          await new Promise((resolve) => setTimeout(resolve, 2000)); // Имитация загрузки
+          setLoading(false);
+        };
+    
+        fetchData();
+      }, [setLoading]);
     return (
+        <>
+        {loading ? (
+      <Skeleton height="auto" width="100%" /> // Скелетон для логотипа
+    ) : (
         <footer 
         className="bg-blue-950 px-0 pt-16 pb-6 mt-14 w-full">
             <div
@@ -86,6 +104,9 @@ const Footer = () => {
                 </div>
             </div>
         </footer>
+    )}
+        </>
+
     )
 }
 

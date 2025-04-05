@@ -44,3 +44,22 @@ transition: transform 0.3s ease; /* Плавный переход */
 transform: scaleX(1); /* Показать подчеркивание при наведении */
 }
 
+.round-skeleton {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%; /* Делает элемент круглым */
+  background-color: #e0e0e0; /* Цвет фона для скелетона */
+  animation: pulse 1.5s infinite; /* Добавьте анимацию, если нужно */
+}
+
+@keyframes pulse {
+  0% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0.5;
+  }
+  100% {
+      opacity: 1;
+  }
+}
