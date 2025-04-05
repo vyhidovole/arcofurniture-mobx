@@ -1,20 +1,32 @@
 
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import catalogueStore from "@/store/CatalogueStore"; 
+import { useLoading } from '@/context/LoadingContext'; 
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import catalogueStore from "@/store/CatalogueStore";
 import Alert from "@/components/Alert/Alert";
-import { useCart } from '@/context/CartContext'; 
+import { useCart } from '@/context/CartContext';
 
-const Kitchen = observer(() => { 
-   const {  addToCart } = useCart(); // Используем контекст
+const Kitchen = observer(() => {
+  const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
+  const { addToCart } = useCart(); // Используем контекст
   // Стейт для закрытия компонента уведомления
   const [isShowAlert, setShowAlert] = useState(false);
   useEffect(() => {
     console.log("isShowAlert изменился на:", isShowAlert);
-}, [isShowAlert]);
+  }, [isShowAlert]);
   // const { products, basket } = catalogueStore; // Получаем продукты и корзину из store
   const products = catalogueStore.products; // Предполагаем, что у вас есть массив продуктов
   // Функция для добавления товара в корзину
+  useEffect(() => {
+    const url = '/Kitchen'; // Определяем конечный URL 
+    setLoading(true); // Устанавливаем состояние загрузки в true
+    catalogueStore.getProducts(url).finally(() => {
+      setLoading(false); // Устанавливаем состояние загрузки в false после завершения запроса
+    });
+  }, [setLoading]);
+
   const handleAddToBasket = (item) => {
     catalogueStore.addProductToBasket(item); // Добавляем продукт в корзину
     addToCart()
@@ -23,13 +35,13 @@ const Kitchen = observer(() => {
     console.log("Показать алерт:", true); // Логируем изменение состояния
     setTimeout(() => {
       setShowAlert(false); // Скрываем алерт
-  }, 3000); 
-};
+    }, 3000);
+  };
   useEffect(() => {
     const url = '/Kitchen'; // Определяем конечный URL 
     catalogueStore.getProducts(url);
   }, []);
- 
+
   // Итерация по данным и отрисовка карточек
   const renderData =
     catalogueStore.products.length > 0 &&
@@ -69,19 +81,28 @@ const Kitchen = observer(() => {
         <p>{item.price || 'Нет цены'}</p>
         <button
           className="text-white bg-sky-800   px-6 py-1 rounded-sm "
-           onClick={() => handleAddToBasket(item)} >
+          onClick={() => handleAddToBasket(item)} >
           купить
         </button>
       </div>
     ));
-    console.log("Текущая корзина:", catalogueStore.basket);
-    console.log(catalogueStore.products); // Логируем продукты для отладки
-    console.log("Количество уникальных товаров в корзине:", catalogueStore.quantity); // Логируем количество уникальных товаров
+  console.log("Текущая корзина:", catalogueStore.basket);
+  console.log(catalogueStore.products); // Логируем продукты для отладки
+  console.log("Количество уникальных товаров в корзине:", catalogueStore.quantity); // Логируем количество уникальных товаров
 
-    return (
-      <>
-     <div className="grid grid-cols-2 gap-6 relative lg:grid lg:grid-cols-4 lg:gap-6 ">
-        {renderData}
+  return (
+    <>
+      <div className="grid grid-cols-2 gap-6 relative lg:grid lg:grid-cols-4 lg:gap-6 ">
+        {loading ? (
+          // Отображение Skeleton, пока данные загружаются
+          Array.from({ length: 8 }).map((_, index) => (
+            <div key={index} className='relative border-2 border-blue-500 rounded-lg w-[250px] h-[300px] overflow-hidden'>
+              <Skeleton height="100%" />
+            </div>
+          ))
+        ) : (
+          renderData
+        )}
       </div>
       {isShowAlert && (
         <Alert
@@ -92,9 +113,9 @@ const Kitchen = observer(() => {
           <p>Товар добавлен в корзину!</p>
         </Alert>
       )}
-     </>
-      
-    );
-  });
-  
-  export default Kitchen;
+    </>
+
+  );
+});
+
+export default Kitchen;
