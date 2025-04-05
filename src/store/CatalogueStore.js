@@ -7,6 +7,7 @@ import { makeObservable, observable, action, runInAction } from "mobx";
 class CatalogueStore extends BaseStore {
 
   products = []; // Инициализируем массив товаров
+  workItems = []; // Инициализируем массив работ
   basket = []; // Корзина
   quantity = 0;
 
@@ -14,6 +15,7 @@ class CatalogueStore extends BaseStore {
     super();
     makeObservable(this, {
       products: observable, // Делаем products наблюдаемым
+      workItems: observable, // Делаем workItems наблюдаемым
       basket: observable, // Делаем basket наблюдаемым
       quantity: observable, // Делаем quantity наблюдаемым
       getProducts: action, // Делаем getProducts действием
@@ -33,23 +35,51 @@ class CatalogueStore extends BaseStore {
    * Функции для получения товаров с сервера.
    * Использует fetch для отправки запроса на сервер и обновляет массив товаров.
    */
-  getProducts(url) {
-    fetch(`${this.baseUrl}${url}`) // Используем базовый URL
-      .then((response) => {
+  // getProducts(url) {
+  //   fetch(`${this.baseUrl}${url}`) // Используем базовый URL
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       runInAction(() => {
+  //         this.products.replace(data); // Обновляем состояние с полученными данными
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching products:", error);
+  //     });
+  // }
+  async getProducts(url) {
+    try {
+        const response = await fetch(`${this.baseUrl}${url}`);
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`Ошибка HTTP: ${response.status}`);
         }
-        return response.json();
-      })
-      .then((data) => {
-        runInAction(() => {
-          this.products.replace(data); // Обновляем состояние с полученными данными
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
+        const data = await response.json();
+        this.products = data; // Предполагаем, что данные - это массив продуктов
+    } catch (error) {
+        console.error("Ошибка при загрузке продуктов:", error);
+    }
+}
+
+async getWorkItems(url) {
+  try {
+      const response = await fetch(`${this.baseUrl}${url}`);
+      if (!response.ok) {
+          throw new Error(`Ошибка HTTP: ${response.status}`);
+      }
+      const data = await response.json();
+      runInAction(() => {
+          this.workItems = data; // Предполагаем, что данные - это массив работ
       });
+  } catch (error) {
+      console.error("Ошибка при загрузке работ:", error);
   }
+}
+
 
   addProductToBasket(item) {
     console.log("Добавляем продукт в корзину:", item); // Логируем добавляемый продукт
