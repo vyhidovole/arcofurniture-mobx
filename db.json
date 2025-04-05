@@ -496,6 +496,12 @@
          "imgSrc":"/images/catalog5.jpg"
            
      }
+],
+"Work":[
+    {
+       "id": "1",
+       "imgSrc":"/images/image_inst.png"
+          
+    } 
 ]
-
 }
