@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Link from "next/link";
 import { useLoading } from '@/context/LoadingContext';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -41,7 +42,8 @@ const MenuBar = () => {
                 <DropdownCouch />
                 <DropdownLobby />
                 <DropdownCupboard />
-            </div>
+                <Link href="/" className="text-2xl font-medium">каталог</Link>
+               </div>
         )}
     </div>
 );
