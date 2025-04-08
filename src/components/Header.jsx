@@ -14,6 +14,7 @@ import { Drawer } from "@/components/Drawer/Drawer";
 import '@/components/Header.css';
 import BurgerButton from "@/components/BurgerButton";
 import { BurgerMenu } from "@/components/BurgerMenu";
+import SearchInput from "@/components/Input/SearchInput";
 
 
 
@@ -111,6 +112,7 @@ const Header = () => {
       {loading ? <Skeleton width={100} height={20} /> : 'Схема проезда'}
       </button>
     </div>
+    <SearchInput />
     <div className="hidden lg:flex">
       {loading ? (
         <Skeleton height={20} width={100} />
