@@ -15,7 +15,7 @@ const DropdownCuboard = () => {
   return (
     <MenuRoot>
       <MenuTrigger asChild>
-        <Button className='outline-transparent' size="sm" rightIcon={<IoChevronDown />}>
+        <Button className='outline-transparent hover:cursor-pointer' size="sm" rightIcon={<IoChevronDown />}>
           ШКАФЫ-КУПЕ
         </Button>
       </MenuTrigger>
