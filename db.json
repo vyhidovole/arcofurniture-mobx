@@ -497,11 +497,69 @@
            
      }
 ],
+
 "Work":[
     {
        "id": "1",
        "imgSrc":"/images/image_inst.png"
           
     } 
+],
+"Tables_and_chairs":[
+    {
+       "id": "1",
+       "name": "Lucido",
+       "category": "стулья",
+       "color":  ["#808080", "#e19a44", "#6c4925"], 
+       "price": "5017 руб",
+        "imgSrc":"/images/catalog8.jpg"
+          
+    },
+    {
+        "id": "2",
+        "name": "Лусидо",
+        "category": "стулья",
+         "color": ["#808080", "#e19a44", "#6c4925"],
+         "price": "5017 руб",
+         "imgSrc":"/images/catalog8.jpg"
+           
+     },
+     {
+        "id": "3",
+        "name": "Денвер",
+        "category": "стулья",
+         "color": ["#808080", "#e19a44", "#6c4925"],
+         "price": "5017 руб",
+         "imgSrc":"/images/catalog8.jpg"
+           
+     },
+     {
+        "id": "4",
+        "name": "Denver",
+        "category": "стулья",
+         "color": ["#808080", "#e19a44", "#6c4925"],
+         "price": "5017 руб",
+         "imgSrc":"/images/catalog8.jpg"
+           
+     },
+     {
+        "id": "5",
+        "name": "Lucido",
+        "category": "стулья",
+         "color": ["#808080", "#e19a44", "#6c4925"],
+         "price": "5017 руб",
+         "imgSrc":"/images/catalog8.jpg"
+           
+     },
+     {
+        "id": "6",
+        "name": "Денвер",
+        "category": "стулья",
+         "color": ["#808080", "#e19a44", "#6c4925"],
+         "price": "5017 руб",
+         "imgSrc":"/images/catalog8.jpg"
+           
+     }
 ]
+
 }
