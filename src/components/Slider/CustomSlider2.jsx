@@ -41,7 +41,7 @@ const CustomSlider2 = ({ data, loading }) => {
                     }}
                 >
                     {data.map((item) => (
-                        <SwiperSlide key={item.id} className='bg-zinc-200 !flex justify-center items-center'>
+                        <SwiperSlide key={item.id} className='bg-zinc-400 !flex justify-center items-center'>
                             <div className='border-2 border-blue-500 rounded-lg overflow-hidden w-[200px] h-[250px] flex flex-col items-center'>
                                 <img src={item.imgSrc || '/path/to/default-image.jpg'} alt={item.name} />
                                 <h2>{item.name}</h2>
