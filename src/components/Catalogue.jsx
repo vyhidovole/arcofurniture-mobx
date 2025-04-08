@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Link from "next/link";
 import { observer } from "mobx-react";
 import catalogueStore from "@/store/CatalogueStore"
 import { useLoading } from '@/context/LoadingContext'; // Импортируйте хук контекста загрузки
@@ -18,6 +19,19 @@ const Catalogue = observer(() => {
       setLoading(false); // Устанавливаем состояние загрузки в false после завершения запроса
     });
   }, [setLoading])
+
+  // Соответствия между названиями и URL
+  const productLinks = {
+    "кухни": "/kitchen",
+    "гостиные": "/drawing-room",
+    "детские": "/nursery",
+    "спальни": "/bedroom",
+    "диваны": "/couch",
+    "прихожие": "/hallway",
+    "шкафы-купе": "/couch",
+    "столы и стулья": "/tables-and-chairs",
+    
+  };
   // Итерация по данным и отрисовка карточек
   const renderData =
     catalogueStore.products.length > 0 &&
@@ -32,11 +46,13 @@ const Catalogue = observer(() => {
           
 
         />
-        
+        <Link href={productLinks[item.name.toLowerCase()] || '/default'} passHref>
         <button
           className="text-white bg-sky-800 absolute px-6 py-1 rounded-sm bottom-0 left-0">
           {item.name}
         </button>
+        </Link>
+       
       </div>
     ))
 
@@ -53,7 +69,7 @@ const Catalogue = observer(() => {
       ) : (
         renderData
       )}
-      {/* {renderData} */}
+     
     </div>
   );
 })
