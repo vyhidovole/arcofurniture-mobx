@@ -77,7 +77,7 @@ const Account = (setNewState) => {
             <form
                 onSubmit={handleFormSubmit}
                 method="dialog"
-                className="sm:inline-flex flex-col lg:flex-wrap">
+                className="flex flex-col sm:flex-row lg:flex-wrap">
                 <div className="inline-flex flex-col m-6">
                     
                     <Input
@@ -135,7 +135,7 @@ const Account = (setNewState) => {
                     name="confirmation"
                     value={formData.confirmation}
                     onChange={handleChange}
-                    error={errors.password}
+                    error={errors.confirmation}
                 />
                 </div>
 
@@ -144,6 +144,7 @@ const Account = (setNewState) => {
                 type="submit" 
                 variant="secondary"
                 isLoading={isLoading} // Передаём состояние загрузки
+               className="w-1/6 h-1/6 mt-12"
                 >
                         Отправить
                     </Button>
