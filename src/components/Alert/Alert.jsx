@@ -34,40 +34,26 @@ const Alert = ({ variant = "neutral", children, isOpen, onClose }) => {
   };
 
   // Стейт для открытия/закрытия компонента.
-  // const [isVisible, setIsVisible] = useState(isOpen);
-const [isShowAlert, setShowAlert] = useState(false);
+ const [isShowAlert, setShowAlert] = useState(false);
   // Если не передавать в хук, то не увидит изменений.
   useEffect(() => {
-    // setIsVisible(isOpen);
     setShowAlert(isOpen)
   }, [isOpen]);
 
-  /**
-   * Закрыть компонент.
-   * Вызывает функцию onClose после закрытия компонента.
-   */
-  // const closeAlert = () => {
-  //   // setIsVisible(false);
-  //   setShowAlert(false)
-  //   onClose();
-  // };
-
   if (!isOpen) return null;
   return (
-    
-    // isVisible
     isShowAlert && (
       <div
         className={`flex items-center ${variantClasses[variant]} fixed top-4 left-1/2 transform -translate-x-1/2 w-96 px-3 py-2 rounded-md z-50`}
         role="alert"
       >
-       
+
         <div className="">{iconVariant[variant]}</div>
         <div className="ml-2">{children}</div>
       </div>
     )
   );
- 
+
 };
 
 export default Alert;
