@@ -7,6 +7,16 @@ import catalogueStore from "@/store/CatalogueStore";
 import Alert from "@/components/Alert/Alert";
 import { useCart } from '@/context/CartContext'; 
 
+/**
+ * Компонент для отображения товаров для детской комнаты.
+ * Загружает список товаров из MobX Store, отображает их и позволяет добавлять в корзину.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий детские товары.
+ *
+ * @example
+ * return <Nursery />;
+ */
 const Nursery = observer(() => { 
   const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
    const {  addToCart } = useCart(); // Используем контекст

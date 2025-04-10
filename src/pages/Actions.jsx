@@ -4,11 +4,31 @@ import CustomSlider2 from '@/components/Slider/CustomSlider2';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+/**
+ * Компонент для отображения акций.
+ * Загружает данные о продуктах и отображает их в виде слайдера.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий акции.
+ *
+ * @example
+ * return (
+ *   <Actions />
+ * );
+ */
 const Actions = () => {
   const [loading, setLoading] = useState(true); // Состояние для загрузки
   const [data, setData] = useState([]); // Состояние для данных
 
   useEffect(() => {
+     /**
+     * Функция для загрузки данных о продуктах.
+     * Загружает данные из локального JSON-файла и обновляет состояние компонента.
+     *
+     * @async
+     * @function fetchData
+     * @returns {Promise<void>} Возвращает промис, который разрешается после загрузки данных.
+     */
     const fetchData = async () => {
       try {
         // Имитация загрузки данных из db.json

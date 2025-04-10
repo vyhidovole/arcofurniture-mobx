@@ -4,6 +4,29 @@ import useForm from "@/hooks/useForm";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 
+/**
+ * Модальное окно для заказа звонка.
+ *
+ * Этот компонент отображает модальное окно, где пользователь может оставить свои контактные данные для обратного звонка.
+ *
+ * @component
+ * @param {boolean} isOpen - Определяет, открыто ли модальное окно.
+ * @param {function} onClose - Функция, вызываемая для закрытия модального окна.
+ * @param {function} setNewForm - Функция для обновления состояния формы после успешной отправки.
+ *
+ * @example
+ * const [isModalOpen, setModalOpen] = useState(false);
+ * const handleNewForm = (data) => {
+ *   console.log('Новая форма:', data);
+ * };
+ * 
+ * return (
+ *   <>
+ *     <button onClick={() => setModalOpen(true)}>Открыть модальное окно</button>
+ *     <ModalCall isOpen={isModalOpen} onClose={() => setModalOpen(false)} setNewForm={handleNewForm} />
+ *   </>
+ * );
+ */
 
 const ModalCall = ({ isOpen, onClose, setNewForm }) => {
     const { formData, errors, handleChange, handleSubmit, resetForm } = useForm(

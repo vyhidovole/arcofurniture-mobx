@@ -4,6 +4,19 @@ import { useLoading } from '@/context/LoadingContext'; // Импортируем
 import Skeleton from 'react-loading-skeleton'; // Импортируем скелетон
 import 'react-loading-skeleton/dist/skeleton.css'; // Импортируем стили для скелетона
 
+/**
+ * Компонент Footer отображает нижний колонтитул сайта с информацией о компании
+ * и ссылками на различные категории продуктов.
+ *
+ * Этот компонент использует контекст загрузки для отображения состояния загрузки
+ * во время получения данных (например, логотипа).
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий нижний колонтитул сайта.
+ *
+ * @example
+ * <Footer />
+ */
 const Footer = () => {
     const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
     useEffect(() => {

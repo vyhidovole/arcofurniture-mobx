@@ -11,6 +11,17 @@ import DropdownBedroom from "../components/Dropdown/DropdownBedroom";
 import DropdownCouch from "../components/Dropdown/DropdownCouch";
 import DropdownLobby from "../components/Dropdown/DropdownLobby";
 
+/**
+ * Компонент MenuBar отображает меню навигации с выпадающими списками.
+ * Он использует контекст загрузки для отображения индикатора загрузки
+ * во время получения данных.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий меню навигации.
+ *
+ * @example
+ * <MenuBar />
+ */
 
 const MenuBar = () => {
   const { loading, setLoading } = useLoading(); // Получаем состояние загрузки

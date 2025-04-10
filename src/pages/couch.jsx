@@ -7,6 +7,20 @@ import catalogueStore from "@/store/CatalogueStore";
 import Alert from "@/components/Alert/Alert";
 import { useCart } from '@/context/CartContext'; 
 
+/**
+ * Компонент для отображения и управления товарами (диванами).
+ * Загружает список товаров из MobX store, отображает их и позволяет добавлять в корзину.
+ *
+ * Этот компонент использует MobX для управления состоянием и контекст для работы с корзиной.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий список диванов.
+ *
+ * @example
+ * return (
+ *   <Couch />
+ * );
+ */
 const Couch = observer(() => { 
   const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
    const {  addToCart } = useCart(); // Используем контекст
@@ -17,6 +31,12 @@ const Couch = observer(() => {
 }, [isShowAlert]);
   // const { products, basket } = catalogueStore; // Получаем продукты и корзину из store
   const products = catalogueStore.products; // Предполагаем, что у вас есть массив продуктов
+   /**
+   * Функция для добавления товара в корзину.
+   * Добавляет продукт в корзину и отображает уведомление.
+   *
+   * @param {Object} item - Объект товара, который нужно добавить в корзину.
+   */
   // Функция для добавления товара в корзину
   const handleAddToBasket = (item) => {
     catalogueStore.addProductToBasket(item); // Добавляем продукт в корзину

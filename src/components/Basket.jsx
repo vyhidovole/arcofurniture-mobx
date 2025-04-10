@@ -3,6 +3,21 @@ import { observer } from "mobx-react-lite";
 import catalogueStore from "@/store/CatalogueStore"; // Импортируйте ваше MobX хранилище
 import Product from "./Product/Product";
 
+/**
+ * Компонент для отображения корзины покупок.
+ *
+ * Этот компонент использует MobX для управления состоянием корзины.
+ * При монтировании компонента корзина инициализируется, загружаются
+ * сохраненные товары из localStorage, а также корзина сохраняется
+ * в localStorage при изменении.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент корзины покупок.
+ *
+ * @example
+ * return <Basket />;
+ */
+
 const Basket = observer(() => {
   useEffect(() => {
     catalogueStore.initializeBasket(); // Инициализация корзины при монтировании

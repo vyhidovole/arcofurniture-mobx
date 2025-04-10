@@ -35,50 +35,34 @@ class CatalogueStore extends BaseStore {
    * Функции для получения товаров с сервера.
    * Использует fetch для отправки запроса на сервер и обновляет массив товаров.
    */
-  // getProducts(url) {
-  //   fetch(`${this.baseUrl}${url}`) // Используем базовый URL
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! status: ${response.status}`);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       runInAction(() => {
-  //         this.products.replace(data); // Обновляем состояние с полученными данными
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching products:", error);
-  //     });
-  // }
+
   async getProducts(url) {
     try {
-        const response = await fetch(`${this.baseUrl}${url}`);
-        if (!response.ok) {
-            throw new Error(`Ошибка HTTP: ${response.status}`);
-        }
-        const data = await response.json();
-        this.products = data; // Предполагаем, что данные - это массив продуктов
-    } catch (error) {
-        console.error("Ошибка при загрузке продуктов:", error);
-    }
-}
-
-async getWorkItems(url) {
-  try {
       const response = await fetch(`${this.baseUrl}${url}`);
       if (!response.ok) {
-          throw new Error(`Ошибка HTTP: ${response.status}`);
+        throw new Error(`Ошибка HTTP: ${response.status}`);
+      }
+      const data = await response.json();
+      this.products = data; // Предполагаем, что данные - это массив продуктов
+    } catch (error) {
+      console.error("Ошибка при загрузке продуктов:", error);
+    }
+  }
+
+  async getWorkItems(url) {
+    try {
+      const response = await fetch(`${this.baseUrl}${url}`);
+      if (!response.ok) {
+        throw new Error(`Ошибка HTTP: ${response.status}`);
       }
       const data = await response.json();
       runInAction(() => {
-          this.workItems = data; // Предполагаем, что данные - это массив работ
+        this.workItems = data; // Предполагаем, что данные - это массив работ
       });
-  } catch (error) {
+    } catch (error) {
       console.error("Ошибка при загрузке работ:", error);
+    }
   }
-}
 
 
   addProductToBasket(item) {
@@ -157,10 +141,6 @@ async getWorkItems(url) {
     });
   }
   // Обновление количества товаров в корзине
-  // updateCount() {
-  //   this.quantity = this.basket.length; // Обновляем quantity, равный количеству уникальных товаров
-  //   console.log("Количество уникальных товаров обновлено:", this.quantity);
-  // }
   updateCount() {
     this.quantity = this.basket.reduce((total, product) => total + product.quantity, 0);
     console.log("Обновлено количество товаров в корзине:", this.quantity);

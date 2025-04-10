@@ -1,7 +1,17 @@
 import React, { useState, } from "react"
 import Link from "next/link";
 import ModalPrivetOffice from "@/components/Modal/ModalPrivetOffice";
-
+/**
+ * Компонент для отображения страницы личного кабинета.
+ * Содержит ссылки на главную страницу и страницу личного кабинета, 
+ * а также модальное окно для авторизации пользователя.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий страницу личного кабинета.
+ *
+ * @example
+ * return <PrivetOffice />;
+ */
 const PrivetOffice = () => {
     const [isEntryModalOpen, setEntryModalOpen] = useState(true); // Состояние для ModalPrivetOffice
     const [userData, setUserData] = useState(null); // Хранение данных пользователя

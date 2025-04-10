@@ -6,7 +6,19 @@ import { useLoading } from '@/context/LoadingContext'; // Импортируйт
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-
+/**
+ * Компонент Catalogue отображает список продуктов.
+ *
+ * Этот компонент использует MobX для управления состоянием продуктов
+ * и контекст загрузки для отображения состояния загрузки во время
+ * получения данных с сервера.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий каталог продуктов.
+ *
+ * @example
+ * <Catalogue />
+ */
 
 const Catalogue = observer(() => {
 

@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import '../Slider/sliderStiles.css'
@@ -11,7 +10,25 @@ import 'swiper/css/pagination';
 
 // External Data import
 const url = 'http://localhost:3000/Products';
-
+/**
+ * Компонент для отображения слайдера товаров.
+ *
+ * Этот компонент использует библиотеку Swiper для отображения списка товаров
+ * в виде слайдера. При загрузке отображается скелетон.
+ *
+ * @component
+ * @param {Array} data - Массив объектов товаров, который включает информацию о каждом товаре.
+ * @param {boolean} loading - Индикатор загрузки. Если true, отображается скелетон.
+ * @returns {JSX.Element} Элемент слайдера товаров.
+ *
+ * @example
+ * const products = [
+ *     { id: 1, name: 'Товар 1', imgSrc: '/images/product1.jpg', category: 'Категория 1', color: ['#ff0000', '#00ff00'], price: '\$10' },
+ *     { id: 2, name: 'Товар 2', imgSrc: '/images/product2.jpg', category: 'Категория 2', color: '#0000ff', price: '\$20' },
+ * ];
+ * 
+ * return <CustomSlider2 data={products} loading={false} />;
+ */
 
 const CustomSlider2 = ({ data, loading }) => {
     if (loading) {

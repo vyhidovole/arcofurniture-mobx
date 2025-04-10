@@ -5,6 +5,17 @@ import Alert from "@/components/Alert/Alert";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 
+/**
+ * Компонент для восстановления пароля.
+ * Позволяет пользователю ввести свой адрес электронной почты для получения нового пароля.
+ *
+ * @component
+ * @param {Function} setNewState - Функция для обновления состояния родительского компонента.
+ * @returns {JSX.Element} Элемент, представляющий форму восстановления пароля.
+ *
+ * @example
+ * return <Password setNewState={someFunction} />;
+ */
 
 const Password = (setNewState) => {
 
@@ -18,7 +29,12 @@ const Password = (setNewState) => {
     const [alertMessage, setAlertMessage] = useState('');
     const [alertVariant, setAlertVariant] = useState('info');
     const [isLoading, setIsLoading] = useState(false); // Состояние загрузки
-    
+    /**
+     * Обработчик отправки формы.
+     * Предотвращает перезагрузку страницы, отправляет данные формы и управляет состоянием уведомлений.
+     *
+     *  @param {Event} e - Событие отправки формы.
+     */
     const handleFormSubmit = async (e) => {
         e.preventDefault(); // Предотвращаем перезагрузку страницы
         setIsLoading(true); // Устанавливаем состояние загрузки
@@ -55,6 +71,10 @@ const Password = (setNewState) => {
         setIsLoading(false); // Сбрасываем состояние загрузки
     }
 
+    /**
+     * Обработчик закрытия уведомления.
+     * Скрывает уведомление при вызове.
+     */
     const handleCloseAlert = () => {
         setShowAlert(false);
     };

@@ -4,7 +4,16 @@ import { TbCash } from 'react-icons/tb'; // Импортируем иконку 
 import Skeleton from 'react-loading-skeleton'; // Импортируем Skeleton для индикации загрузки
 import 'react-loading-skeleton/dist/skeleton.css'; // Импортируем стили для Skeleton
 import { useLoading } from '@/context/LoadingContext'; // Импорт вашего кастомного хука
-
+/**
+ * Компонент для отображения способов оплаты.
+ * Загружает состояние и отображает доступные варианты оплаты.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий способы оплаты.
+ *
+ * @example
+ * return <Payment />;
+ */
 const Payment = () => {
     const { loading } = useLoading(); // Получаем состояние загрузки из useLoading
 

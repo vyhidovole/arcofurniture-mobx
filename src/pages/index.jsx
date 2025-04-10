@@ -2,7 +2,16 @@ import React from "react";
 import Head from "next/head";
 import Catalogue from "@/components/Catalogue";
 
-
+/**
+ * Главная страница приложения.
+ * Отображает заголовок страницы и компонент каталога.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий главную страницу.
+ *
+ * @example
+ * return <Home />;
+ */
 /* Домашнаяя страница */
 const Home = () => (
   <>

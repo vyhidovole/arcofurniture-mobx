@@ -9,7 +9,14 @@ import {
 } from "@/components/ui/menu"
 import { IoChevronDown } from "react-icons/io5";
 
-
+/**
+ * 
+ *
+ * @component
+ * @returns {JSX.Element} Элемент выпадающего меню с различными вариантами детских товаров.
+ *
+ 
+ */
 // Компонент выпадающего меню для шкафов-купе
 const DropdownCuboard = () => {
   return (

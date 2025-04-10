@@ -3,6 +3,18 @@ import Skeleton from 'react-loading-skeleton'; // Импортируем Skeleto
 import 'react-loading-skeleton/dist/skeleton.css'; // Импортируем стили для Skeleton
 import { useLoading } from '@/context/LoadingContext'; // Импорт вашего кастомного хука
 
+/**
+ * Компонент для отображения услуг по сборке и монтажу.
+ * Загружает и отображает список услуг с их ценами.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий услуги по сборке и монтажу.
+ *
+ * @example
+ * return (
+ *   <Assembling />
+ * );
+ */
 const Assembling = () => {
     const { loading } = useLoading(); // Получаем состояние загрузки из useLoading
 

@@ -5,7 +5,21 @@ import Alert from "@/components/Alert/Alert";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 
-
+/**
+ * Компонент для регистрации пользователя.
+ * Позволяет пользователю вводить свои данные для создания аккаунта.
+ *
+ * @component
+ * @param {Function} setNewState - Функция для обновления состояния родительского компонента.
+ * @returns {JSX.Element} Элемент, представляющий форму регистрации.
+ *
+ * @example
+ * const handleNewState = (newState) => {
+ *   // Обработка нового состояния
+ * };
+ * 
+ * <Account setNewState={handleNewState} />
+ */
 
 const Account = (setNewState) => {
     

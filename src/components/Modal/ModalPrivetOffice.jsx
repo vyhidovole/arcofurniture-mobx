@@ -5,6 +5,24 @@ import useForm from "@/hooks/useForm";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 
+/**
+ * Модальное окно для регистрации пользователя в Личном кабинете.
+ *
+ * Этот компонент отображает модальное окно, где пользователь может ввести свои данные для регистрации.
+ *
+ * @component
+ * @param {function} setNewState - Функция, вызываемая для обновления состояния после успешной отправки формы.
+ *
+ * @example
+ * const handleNewState = (data) => {
+ *   console.log('Новое состояние:', data);
+ * };
+ * 
+ * return (
+ *   <ModalPrivetOffice setNewState={handleNewState} />
+ * );
+ */
+
 const ModalPrivetOffice = ({ setNewState }) => {
     const { formData, errors, handleChange, handleSubmit, resetForm } = useForm({
         name: "",

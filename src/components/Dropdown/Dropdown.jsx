@@ -9,8 +9,17 @@ import {
 } from "@/components/ui/menu"
 import { IoChevronDown } from "react-icons/io5";
 
-
-
+/**
+ * Компонент выпадающего меню для навигации по разделу "КУХНИ".
+ *
+ * @component
+ * @returns {JSX.Element} Элемент выпадающего меню с различными вариантами кухонь.
+ *
+ * @example
+ * return (
+ *   <Dropdown />
+ * );
+ */
 
 // Компонент выпадающего меню
 const Dropdown = () => {

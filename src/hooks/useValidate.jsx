@@ -1,7 +1,6 @@
 // Ранее использовался отдельно, сейчас используем useForm 
 import { useState } from "react";
 import { validateForm } from "../utils/validators";
-// import { validateForm } from "../../utils/validators-two";
 
 /**
  * Хук для управления состоянием формы и валидацией.

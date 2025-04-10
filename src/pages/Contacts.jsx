@@ -7,6 +7,18 @@ import { useLoading } from '@/context/LoadingContext'; // Импортируем
 import Skeleton from 'react-loading-skeleton'; // Импортируем скелетон
 import 'react-loading-skeleton/dist/skeleton.css'; // Импортируем стили для скелетона
 
+/**
+ * Компонент для отображения контактной информации.
+ * Загружает и отображает информацию о компании, включая адрес, время работы, телефон и email.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий контактную информацию.
+ *
+ * @example
+ * return (
+ *   <Contacts />
+ * );
+ */
 const Contacts = () => {
     const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
     useEffect(() => {

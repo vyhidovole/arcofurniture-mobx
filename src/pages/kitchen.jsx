@@ -8,6 +8,17 @@ import catalogueStore from "@/store/CatalogueStore";
 import Alert from "@/components/Alert/Alert";
 import { useCart } from '@/context/CartContext';
 
+/**
+ * Компонент для отображения кухонной мебели.
+ * Загружает список товаров из MobX Store, отображает их и позволяет добавлять в корзину.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий кухонную мебель.
+ *
+ * @example
+ * return <Kitchen />;
+ */
+
 const Kitchen = observer(() => {
   const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
   const { addToCart } = useCart(); // Используем контекст
@@ -26,7 +37,12 @@ const Kitchen = observer(() => {
       setLoading(false); // Устанавливаем состояние загрузки в false после завершения запроса
     });
   }, [setLoading]);
-
+ /**
+   * Функция для добавления товара в корзину.
+   * Добавляет продукт в корзину и отображает уведомление.
+   *
+   * @param {Object} item - Объект товара, который нужно добавить в корзину.
+   */
   const handleAddToBasket = (item) => {
     catalogueStore.addProductToBasket(item); // Добавляем продукт в корзину
     addToCart()

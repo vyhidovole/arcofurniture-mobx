@@ -2,7 +2,16 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useLoading } from '@/context/LoadingContext'; // Импорт вашего кастомного хука
-
+/**
+ * Компонент для отображения информации о доставке и оплате.
+ * Загружает состояние из контекста загрузки и отображает либо скелетон, либо информацию о доставке.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий информацию о доставке и оплате.
+ *
+ * @example
+ * return <Delivery />;
+ */
 const Delivery = () => {
     const { loading } = useLoading(); // Получаем состояние загрузки из useLoading
 

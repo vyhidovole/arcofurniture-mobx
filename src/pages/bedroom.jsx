@@ -6,7 +6,18 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import catalogueStore from "@/store/CatalogueStore"; 
 import Alert from "@/components/Alert/Alert";
 import { useCart } from '@/context/CartContext'; 
-
+/**
+ * Компонент для отображения товаров в категории "Спальня".
+ * Загружает и отображает список продуктов, а также позволяет добавлять их в корзину.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий товары в спальне.
+ *
+ * @example
+ * return (
+ *   <Bedroom />
+ * );
+ */
 const Bedroom = observer(() => { 
   const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
    const {  addToCart } = useCart(); // Используем контекст

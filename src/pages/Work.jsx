@@ -1,10 +1,3 @@
-// import React from "react";
-
-// const Work = () => {
-//     return <h3>This is Work page</h3>;
-// }
-
-// export default Work;
 import React, { useEffect } from "react";
 import { observer } from "mobx-react";
 import catalogueStore from "@/store/CatalogueStore"
@@ -12,7 +5,16 @@ import { useLoading } from '@/context/LoadingContext'; // Импортируйт
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-
+/**
+ * Компонент для отображения работ.
+ * Загружает список работ из API и отображает их в виде карточек.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий список работ.
+ *
+ * @example
+ * return <Work />;
+ */
 
 const Work = observer(() => {
 

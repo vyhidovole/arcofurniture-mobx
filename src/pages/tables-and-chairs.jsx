@@ -6,7 +6,16 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import catalogueStore from "@/store/CatalogueStore";
 import Alert from "@/components/Alert/Alert";
 import { useCart } from '@/context/CartContext';
-
+/**
+ * Компонент для отображения таблиц и стульев.
+ * Загружает список продуктов, отображает их и позволяет добавлять в корзину.
+ *
+ * @component
+ * @returns {JSX.Element} Элемент, представляющий список таблиц и стульев.
+ *
+ * @example
+ * return <Tables_and_chairs />;
+ */
 const Tables_and_chairs = observer(() => {
   const { loading, setLoading } = useLoading(); // Получаем состояние загрузки
   const { addToCart } = useCart(); // Используем контекст
@@ -25,7 +34,12 @@ const Tables_and_chairs = observer(() => {
       setLoading(false); // Устанавливаем состояние загрузки в false после завершения запроса
     });
   }, [setLoading]);
-
+/**
+   * Функция для добавления товара в корзину.
+   * Добавляет продукт в корзину и отображает уведомление.
+   *
+   * @param {Object} item - Объект товара, который нужно добавить в корзину.
+   */
   const handleAddToBasket = (item) => {
     catalogueStore.addProductToBasket(item); // Добавляем продукт в корзину
     addToCart()

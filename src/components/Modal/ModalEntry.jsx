@@ -6,7 +6,29 @@ import useForm from "@/hooks/useForm";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 
-
+/**
+ * Модальное окно для входа пользователя.
+ *
+ * Этот компонент отображает модальное окно, где пользователь может ввести свои данные для входа.
+ *
+ * @component
+ * @param {boolean} show - Определяет, открыто ли модальное окно.
+ * @param {function} onClose - Функция, вызываемая для закрытия модального окна.
+ * @param {function} setNewForm - Функция, вызываемая для обновления состояния формы после успешной отправки.
+ *
+ * @example
+ * const [isModalOpen, setModalOpen] = useState(false);
+ * const handleNewForm = (data) => {
+ *   console.log('Новая форма:', data);
+ * };
+ * 
+ * return (
+ *   <>
+ *     <button onClick={() => setModalOpen(true)}>Открыть модальное окно</button>
+ *     <ModalEntry show={isModalOpen} onClose={() => setModalOpen(false)} setNewForm={handleNewForm} />
+ *   </>
+ * );
+ */
 const ModalEntry = ({ show, onClose, setNewForm }) => {
     const { isDarkMode } = useTheme(); // Получаем доступ к теме
     const { formData, errors, handleChange, handleSubmit, resetForm } = useForm(

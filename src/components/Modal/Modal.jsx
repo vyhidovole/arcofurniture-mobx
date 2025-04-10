@@ -1,7 +1,17 @@
 
 import React, { useEffect } from 'react';
 import Image from "next/image";
-
+/**
+ * Модальное окно для отображения схемы проезда.
+ *
+ * Этот компонент отображает модальное окно с информацией о местоположении и изображением схемы проезда.
+ *
+ * @component
+ * @param {boolean} isOpen - Определяет, открыто ли модальное окно.
+ * @param {function} onClose - Функция, вызываемая для закрытия модального окна.
+ * 
+ 
+ */
 const Modal = ({ isOpen, onClose }) => {
   if (!isOpen) return null; // Если модальное окно закрыто, ничего не рендерим
 
