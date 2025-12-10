@@ -1,4 +1,4 @@
-// Ранее использовался отдельно, сейчас используем useForm
+
 import React, { useState } from "react";
 import { validateForm } from "../utils/validators";
 
@@ -98,7 +98,7 @@ function useForm(initialState, setNewState) {
     // Проверка наличия ошибок
     const validationErrors = validateForm(formData);
 
-    // setErrors(validationErrors); // Устанавливаем ошибки
+    
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors); // Устанавливаем ошибки
       console.log("Форма содержит ошибки:", validationErrors);
@@ -145,9 +145,7 @@ function useForm(initialState, setNewState) {
         resolve(true); // Успешная "отправка"
       }, 2000); // Задержка 2 секунды
     });
-
-
-  };
+};
 
   /**
    * Функция для сброса состояния формы.

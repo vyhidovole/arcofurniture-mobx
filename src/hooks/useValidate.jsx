@@ -1,4 +1,3 @@
-// Ранее использовался отдельно, сейчас используем useForm 
 import { useState } from "react";
 import { validateForm } from "../utils/validators";
 

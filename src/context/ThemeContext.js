@@ -11,7 +11,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
  *
  * @example
  * <ThemeProvider>
- *   <YourComponent />
+ *   <MyComponent />
  * </ThemeProvider>
  */
 // Создаем контекст
@@ -27,7 +27,7 @@ export const ThemeProvider = ({ children }) => {
         }
         return false; // Значение по умолчанию
     });
-/**
+    /**
      * Переключает режим темы между светлым и темным.
      * Обновляет состояние и сохраняет новое значение в localStorage.
      */

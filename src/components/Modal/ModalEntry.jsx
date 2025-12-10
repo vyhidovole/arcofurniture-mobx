@@ -173,7 +173,6 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
                         <Button
                             type="submit"
                             variant="secondary"
-
                             disabled={!isFormValid} // Делаем кнопку недоступной, если форма не валидна
                             isLoading={isLoading} // Передаём состояние загрузки
                         >

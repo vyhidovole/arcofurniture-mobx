@@ -15,7 +15,7 @@ import {
  * @param {boolean} props.isOpen - Флаг указывающий открыт/закрыт компонент.
  * @param {function} props.onClose - Функция обратного вызова для закрытия компонента.
  */
-const Alert = ({ variant = "neutral", children, isOpen, onClose }) => {
+const Alert = ({ variant = "neutral", children, isOpen }) => {
   // Стили для вариантов компонента
   const variantClasses = {
     neutral: "bg-gray-100 text-gray-800",
@@ -44,11 +44,11 @@ const Alert = ({ variant = "neutral", children, isOpen, onClose }) => {
   return (
     isShowAlert && (
       <div
-        className={`flex items-center ${variantClasses[variant]} fixed top-4 left-1/2 transform -translate-x-1/2 w-96 px-3 py-2 rounded-md z-50`}
+        className={`flex items-center ${variantClasses[variant]} fixed top-4 left-1/2 transform -translate-x-1/2 
+        w-96 px-3 py-2 rounded-md z-50`}
         role="alert"
       >
-
-        <div className="">{iconVariant[variant]}</div>
+<div className="">{iconVariant[variant]}</div>
         <div className="ml-2">{children}</div>
       </div>
     )

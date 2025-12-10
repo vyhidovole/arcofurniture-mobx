@@ -14,7 +14,7 @@ import ModalPrivetOffice from "@/components/Modal/ModalPrivetOffice";
  */
 const PrivetOffice = () => {
     const [isEntryModalOpen, setEntryModalOpen] = useState(true); // Состояние для ModalPrivetOffice
-    const [userData, setUserData] = useState(null); // Хранение данных пользователя
+    const [, setUserData] = useState(null); // Хранение данных пользователя
 
 
     const closeEntryDialog = () => {

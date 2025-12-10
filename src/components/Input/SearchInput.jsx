@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Link from "next/link";
 import Skeleton from 'react-loading-skeleton'; // Импортируем Skeleton для индикации загрузки
 import 'react-loading-skeleton/dist/skeleton.css'; // Импортируем стили для Skeleton
-import { useLoading } from '@/context/LoadingContext'; // Импорт вашего кастомного хука
+import { useLoading } from '@/context/LoadingContext'; // Импорт кастомного хука
+import { useTheme } from '@/context/ThemeContext';
 
 /**
  * Компонент поля поиска для каталога товаров.
@@ -22,6 +23,7 @@ const SearchInput = () => {
     // Инициализируем состояние для хранения введённого текста в поле поиска
     const [searchTerm, setSearchTerm] = useState('');
     const { loading } = useLoading(); // Получаем состояние загрузки из useLoading
+    const {isDarkMode} = useTheme()
 
     // Массив объектов, содержащих названия и пути к страницам
     const items = [
@@ -57,13 +59,13 @@ const SearchInput = () => {
                         value={searchTerm} // Значение поля ввода связано с состоянием
                         onChange={handleChange} // Устанавливаем обработчик изменения
                         placeholder="Поиск по каталогу"
-                        className="hidden lg:block lg:border rounded p-1 w-full"
+                        className={`hidden lg:block lg:border rounded p-1 w-full ${isDarkMode ? 'bg-dark' : 'bg-light'}`} 
                     />
                     {searchTerm && ( // Показываем список только если есть текст в поле поиска
-                        <ul className="lg:absolute left-0 right-0 bg-white border border-gray-300 z-10 mt-1 rounded shadow-lg">
+                        <ul className={`lg:absolute left-0 right-0 bg-white border border-gray-300 z-10 mt-1 rounded shadow-lg ${isDarkMode ? 'bg-dark' : 'bg-light'}`}>
                             {filteredItems.length > 0 ? ( // Проверяем, есть ли отфильтрованные элементы
                                 filteredItems.map((item, index) => ( // Проходим по отфильтрованным элементам
-                                    <li key={index} className="p-2 hover:bg-gray-200 cursor-pointer">
+                                    <li key={index} className="p-2 hover:bg-gray-400 cursor-pointer">
                                         <Link href={item.path} className="block w-full h-full"> {/* Ссылка на страницу по пути */}
                                             {item.name} {/* Название элемента */}
                                         </Link>

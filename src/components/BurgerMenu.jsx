@@ -24,7 +24,7 @@ export const BurgerMenu = ({ isOpen, onClose, titleBurger }) => {
     /**
      * Функция для закрытия панели.
      *
-     * @type {Function}
+     * @type {function}
      */
     const closeBurger = useCallback(() => {
         onClose();
@@ -33,7 +33,7 @@ export const BurgerMenu = ({ isOpen, onClose, titleBurger }) => {
     /**
      * Обработчик клика вне панели для закрытия панели.
      *
-     * @type {Function}
+     * @type {function}
      * @param {Event} event - Событие клика.
      */
     const handleClick = useCallback(
@@ -81,7 +81,8 @@ export const BurgerMenu = ({ isOpen, onClose, titleBurger }) => {
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                         <aside
                             ref={burgerRef}
-                            className={`absolute left-0 max-h-full h-full w-96 p-8 bg-gray-300 transition-transform duration-300 ease-in-out overflow-y-auto`}
+                            className={`absolute left-0 max-h-full h-full w-96 p-8
+                                 bg-gray-300 transition-transform duration-300 ease-in-out overflow-y-auto`}
                         >
                             <header className="flex justify-between m-4">
                                 <h2 className="text-xl font-bold">{titleBurger}</h2>
@@ -116,7 +117,8 @@ export const BurgerMenu = ({ isOpen, onClose, titleBurger }) => {
                                     <li className="mt-4">
                                         <div className="flex">
                                             <h4 className="">8(961)5259191</h4>
-                                            <button className="border-red-500 border-2 text-red-500 rounded pl-2 pr-2 hover:bg-gray-200" onClick={openCallDialog}>
+                                            <button className="border-red-500 border-2 text-red-500 rounded pl-2 pr-2
+                                             hover:bg-gray-200" onClick={openCallDialog}>
                                                 Заказать звонок
                                             </button>
                                         </div>

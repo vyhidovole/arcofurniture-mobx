@@ -33,7 +33,7 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
         {
             name: "",
             phone: "",
-            
+
         },
         setNewForm
     );
@@ -41,7 +41,7 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
     const [isShowAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertVariant, setAlertVariant] = useState('info');
-   
+
     // Используем useRef для открытия/закрытия модалки
     useEffect(() => {
         if (isOpen) {
@@ -51,12 +51,12 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
         }
     }, [isOpen]);
 
-   // Обработчик клика для закрытия модалки по крестику
+    // Обработчик клика для закрытия модалки по крестику
     const handleClose = () => {
         resetForm(); // Сбрасываем форму перед закрытием
         onClose(); // Закрываем модалку
     };
-   
+
     // Обработчик внешнего клика для закрытия модалки
     const handleBackgroundClick = (e) => {
         if (e.target === dialogRef.current) {
@@ -84,33 +84,39 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
         } else {
             // Устанавливаем сообщение и показываем Alert
             setAlertMessage("Данные введены не корректно.");
-            setAlertVariant('negative'); // Установите нужный вариант
+            setAlertVariant('negative');
             setShowAlert(true);
             setTimeout(() => {
                 setShowAlert(false)
             }, 3000)
             return
         }
-       
-        };
-   
+    };
+
     const handleCloseAlert = () => {
         setShowAlert(false);
     };
-   
+
     return (
-        <div className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center ${isOpen ? 'block' : 'hidden'}`} onClick={handleBackgroundClick} // Добавляем обработчик клика
+        <div className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center
+             ${isOpen ? 'block' : 'hidden'}`}
+            onClick={handleBackgroundClick} // Добавляем обработчик клика
         >
             <dialog ref={dialogRef} className="rounded-xl">
                 <form onSubmit={handleFormSubmit} method="dialog" >
-                    <div className="bg-white p-4  shadow-lg w-72 h-96 flex flex-col " onClick={(e) => e.stopPropagation()}>{/* Останавливаем всплытие клика на модалке */}
+                    <div className="bg-white p-4  shadow-lg w-72 h-96 flex flex-col "
+                     onClick={(e) => e.stopPropagation()}>{/* Останавливаем всплытие клика на модалке */}
                         {/* Заголовок Модального окна */}
                         <div className="flex justify-between items-center bottom-4 ">
                             <h3 className="font-bold">Заказать звонок</h3>
                             <button type="button"
                                 onClick={handleClose}
                                 className="border-gray-300 rounded-xl">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                 className="h-6 w-6" 
+                                 fill="none" 
+                                 viewBox="0 0 24 24" 
+                                 stroke="currentColor">
                                     <path
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
@@ -182,9 +188,9 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
                                 type="submit"
                                 className="with-full p-4 bg-slate-600 text-white rounded-xl mt-6 ">Отправить
                             </button> */}
-                            <Button 
-                            type="submit" 
-                            variant="secondary">
+                            <Button
+                                type="submit"
+                                variant="secondary">
                                 Отправить
                             </Button>
 
@@ -197,7 +203,10 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
                                     {alertMessage}
                                 </Alert>
                             )}
-                            <p className="text-xs text-center mt-6">Отправляя форму, я даю свое согласие на  обработку моих персональных данных.
+                            <p 
+                            className="text-xs text-center mt-6">
+                                Отправляя форму, я даю свое согласие на  
+                                обработку моих персональных данных.
                             </p>
                         </div>
 

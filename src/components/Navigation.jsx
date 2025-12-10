@@ -51,7 +51,7 @@ const Navigation = () => {
       setLoading(true); // Устанавливаем состояние загрузки
       router.push(path).then(() => {
         setLoading(false); // Отключаем состояние загрузки после перехода
-      });;
+      });
       setActiveLink(link);
     }
     console.log(activeLink)
@@ -62,47 +62,47 @@ const Navigation = () => {
       <div className="container flex justify-between">
         {/* Левая часть с первыми пятью пунктами меню */}
         <nav className="flex items-center gap-5">
-        {loading ? (
+          {loading ? (
             // Отображаем скелетон, пока данные загружаются
             Array(5).fill().map((_, index) => (
               <Skeleton key={index} width={100} height={20} />
             ))
           ) : (
-          navItems.slice(0, 5).map((item) => (
-            <a
-              onClick={() => onClickHandler(item.name, item.path)}//передаем путь
-              className={`nav-link cursor-pointer
+            navItems.slice(0, 5).map((item) => (
+              <a
+                onClick={() => onClickHandler(item.name, item.path)}//передаем путь
+                className={`nav-link cursor-pointer
                  ${item.name === activeLink ?
-                  "text-sky-500  underline-animation " : "text-gray-800"
-                }${isDarkMode ? 'dark:text-sky-500' : 'text-gray-800'} `}
-              key={item.path}
-            >
-              {item.name}
-            </a>
-              ))
+                    "text-sky-500  underline-animation " : "text-gray-800"
+                  }${isDarkMode ? 'dark:text-sky-500' : 'text-gray-800'} `}
+                key={item.path}
+              >
+                {item.name}
+              </a>
+            ))
           )}
         </nav>
 
         {/* Правая часть с последними двумя пунктами меню */}
-        
+
         <nav className="flex items-center gap-5">
-        {loading ? (
+          {loading ? (
             // Отображаем скелетон для правой части меню
             Array(2).fill().map((_, index) => (
               <Skeleton key={index} width={80} height={20} />
             ))
           ) : (
-          navItems.slice(5).map((item) => (
-            <a
-              onClick={() => onClickHandler(item.name, item.path)}
-              className={`nav-link cursor-pointer 
+            navItems.slice(5).map((item) => (
+              <a
+                onClick={() => onClickHandler(item.name, item.path)}
+                className={`nav-link cursor-pointer 
                 ${item.name === activeLink ? "text-sky-500 underline-animation " : "text-gray-800"
-                }`}
-              key={item.path}
-            >
-              {item.name}
-            </a>
-          ))
+                  }`}
+                key={item.path}
+              >
+                {item.name}
+              </a>
+            ))
           )}
           {/* Переключатель темы */}
           <fieldset className="relative inline-block w-16 h-8">
@@ -115,9 +115,14 @@ const Navigation = () => {
             />
             <label
               htmlFor="theme-toggle"
-              className={`absolute cursor-pointer top-0 left-0 right-0 bottom-0 rounded-full transition duration-300 ${isDarkMode ? 'bg-blue-600' : 'bg-gray-300'}`}
+              className={`absolute cursor-pointer top-0 left-0 right-0 bottom-0 rounded-full transition duration-300
+                 ${isDarkMode ? 'bg-blue-600' : 'bg-gray-300'}`}
             ></label>
-            <span onClick={toggleTheme} className={`absolute left-1 top-1 block w-6 h-6 bg-white rounded-full transition-transform duration-300 ${isDarkMode ? 'translate-x-8' : ''}`}></span>
+            <span onClick={toggleTheme} 
+            className={`absolute left-1 top-1 block w-6 h-6
+               bg-white rounded-full transition-transform duration-300
+                ${isDarkMode ? 'translate-x-8' : ''}`}>
+            </span>
           </fieldset>
         </nav>
       </div>

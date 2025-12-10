@@ -40,7 +40,7 @@ const Catalogue = observer(() => {
     "спальни": "/bedroom",
     "диваны": "/couch",
     "прихожие": "/hallway",
-    "шкафы-купе": "/couch",
+    "шкафы-купе": "/cupboard",
     "столы и стулья": "/tables-and-chairs",
     
   };

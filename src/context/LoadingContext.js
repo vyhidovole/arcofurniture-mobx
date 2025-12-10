@@ -14,7 +14,7 @@ const LoadingContext = createContext();
  *
  * @example
  * <LoadingProvider>
- *   <YourComponent />
+ *   <MyComponent />
  * </LoadingProvider>
  */
 // Создаем провайдер

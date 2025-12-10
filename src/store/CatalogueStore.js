@@ -1,5 +1,5 @@
 import BaseStore from "./BaseStore";
-import { makeObservable, observable, action, runInAction } from "mobx";
+import { makeObservable, observable, action, runInAction, computed } from "mobx";
 
 /**
  * Класс для управления состоянием товаров.
@@ -9,7 +9,7 @@ class CatalogueStore extends BaseStore {
   products = []; // Инициализируем массив товаров
   workItems = []; // Инициализируем массив работ
   basket = []; // Корзина
-  quantity = 0;
+  // quantity = 0;
 
   constructor() {
     super();
@@ -17,20 +17,23 @@ class CatalogueStore extends BaseStore {
       products: observable, // Делаем products наблюдаемым
       workItems: observable, // Делаем workItems наблюдаемым
       basket: observable, // Делаем basket наблюдаемым
-      quantity: observable, // Делаем quantity наблюдаемым
+      quantity: computed, // Делаем quantity наблюдаемым
       getProducts: action, // Делаем getProducts действием
+      getWorkItems: action,
       addProductToBasket: action, // Делаем addProduct действием
       deleteProductFromBasket: action, // Делаем deleteProductFromBasket действием
       initializeBasket: action,
       incrementProductQuantity: action,
       decrementProductQuantity: action,
-      updateCount: action,
+      // updateCount: action,
       saveToLocalStorage: action,
       clearProduct: action,
 
     });
   }
-
+ get quantity() {
+    return this.basket.reduce((sum, item) => sum + (item.quantity || 0), 0);
+  }
   /**
    * Функции для получения товаров с сервера.
    * Использует fetch для отправки запроса на сервер и обновляет массив товаров.
@@ -67,7 +70,7 @@ class CatalogueStore extends BaseStore {
 
   addProductToBasket(item) {
     console.log("Добавляем продукт в корзину:", item); // Логируем добавляемый продукт
-    const existingProduct = this.basket.find(product => product.id === item.id);
+    const existingProduct = this.basket.find(product => product.id === item.id && item.category === product.category);
 
     if (existingProduct) {
       // Если продукт уже есть в корзине, увеличиваем его количество
@@ -80,7 +83,7 @@ class CatalogueStore extends BaseStore {
     }
 
     // Обновляем количество уникальных товаров в корзине
-    this.updateCount();
+    // this.updateCount();
     this.saveToLocalStorage();
   }
 
@@ -90,29 +93,31 @@ class CatalogueStore extends BaseStore {
     runInAction(() => {
       console.log("Установка корзины:", savedBasket); // Отладочное сообщение
       this.basket = savedBasket;
-      this.updateCount(); // Обновляем количество после установки
+      // this.updateCount(); // Обновляем количество после установки
     });
   }
 
   // Метод для увеличения количества товара
-  incrementProductQuantity(productId) {
-    const product = this.basket.find(item => item.id === productId);
+  incrementProductQuantity(productId, productCategory) {
+    const product = this.basket.find(item => item.id === productId && item.category === productCategory);
     if (product) {
       product.quantity += 1; // Увеличиваем количество на 1
-      this.updateCount();
+      // this.updateCount();
+      this.saveToLocalStorage();
     }
     console.log("количество товаров увеличено")
   }
 
   // Метод для уменьшения количества товара
-  decrementProductQuantity(productId) {
-    const product = this.basket.find(item => item.id === productId);
+  decrementProductQuantity(productId, productCategory) {
+    const product = this.basket.find(item => item.id === productId && item.category === productCategory);
     if (product && product.quantity > 1) {
       product.quantity -= 1; // Уменьшаем количество на 1
-      this.updateCount();
+      // this.updateCount();
+      this.saveToLocalStorage();
     } else if (product && product.quantity === 1) {
       // Если количество товара 1, можно удалить его из корзины
-      this.deleteProductFromBasket(productId);
+      this.deleteProductFromBasket(productId, productCategory);
     }
     console.log("количество товаров уменьшено")
   }
@@ -121,37 +126,37 @@ class CatalogueStore extends BaseStore {
      * Удаляет товар из корзины по его ID.
      * @param {string} itemId - ID товара, который нужно удалить.
      */
-  deleteProductFromBasket(itemId) {
-    console.log("Удаляем товар с ID:", itemId);
+  deleteProductFromBasket(productId, productCategory) {
+    console.log("Удаляем товар с ID:", productId);
     console.log("Текущая корзина:", this.basket);
 
     runInAction(() => {
-      const existingProduct = this.basket.find(item => item.id === itemId);
+      const existingProduct = this.basket.find(item => item.id === productId && item.category === productCategory);
 
       if (existingProduct) {
-        const itemIndex = this.basket.findIndex(item => item.id === itemId);
+        const itemIndex = this.basket.findIndex(item => item.id === productId && item.category === productCategory);
         if (itemIndex !== -1) {
           this.basket.splice(itemIndex, 1); // Удаляем товар из корзины
         }
-        this.updateCount(); // Обновляем количество уникальных товаров
+        // this.updateCount(); // Обновляем количество уникальных товаров
         this.saveToLocalStorage(); // Сохраняем изменения в localStorage
       } else {
-        console.error("Товар не найден в корзине с ID:", itemId);
+        console.error("Товар не найден в корзине с ID:", productId);
       }
     });
   }
   // Обновление количества товаров в корзине
-  updateCount() {
-    this.quantity = this.basket.reduce((total, product) => total + product.quantity, 0);
-    console.log("Обновлено количество товаров в корзине:", this.quantity);
-  }
+  // updateCount() {
+  //   this.quantity = this.basket.reduce((total, product) => total + product.quantity, 0);
+  //   console.log("Обновлено количество товаров в корзине:", this.quantity);
+  // }
 
 
   saveToLocalStorage() {
     try {
       if (typeof window !== 'undefined') {
         localStorage.setItem("basket", JSON.stringify(this.basket));
-        localStorage.setItem("quantity", this.quantity);
+        
         console.log("Сохранено в localStorage:", this.basket, this.quantity); // Отладочное сообщение
       }
     } catch (error) {
@@ -159,19 +164,28 @@ class CatalogueStore extends BaseStore {
     }
   }
   // Инициализация корзины из localStorage
+ // Загружаем только basket из localStorage
   initializeBasket() {
-    if (typeof window !== 'undefined') { // Проверяем, что код выполняется в браузере
-      const savedBasket = JSON.parse(localStorage.getItem("basket")) || [];
-      this.basket = savedBasket;
-      this.updateCount();
-      console.log("Корзина инициализирована:", this.basket); // Отладочное сообщение
-    } else {
-      console.warn("localStorage недоступен, инициализация корзины не выполнена.");
+    if (typeof window !== 'undefined') {
+      const savedBasket = localStorage.getItem('basket');
+      if (savedBasket) {
+        try {
+          runInAction(() => {
+            this.basket = JSON.parse(savedBasket); // Восстанавливаем basket
+          });
+          console.log("Loaded basket from localStorage:", this.basket);
+          console.log("Computed quantity after load:", this.quantity); // Должно быть актуальным, не "3"
+        } catch (error) {
+          console.error("Error loading basket from localStorage:", error);
+        }
+      }
     }
   }
-  clearProduct(id) {
-    this.basket = this.basket.filter(item => item.id !== id); // Удаляем товар с указанным id
-    this.updateCount(); // Обновляем количество после очистки
+
+  clearProduct(productId, productCategory) {
+    this.basket = this.basket.filter(item => !(item.id === productId && item.category === productCategory));// Удаляем товар с указанным id
+    // this.updateCount(); // Обновляем количество после очистки
+    this.saveToLocalStorage(); // Сохраняем обновленную корзину в localStorage
     console.log("Корзина очищена"); // Отладочное сообщение
   }
 

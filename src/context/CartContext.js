@@ -20,13 +20,13 @@ const CartContext = createContext();
 
 // Провайдер для контекста
 export const CartProvider = ({ children }) => {
-    const [count, setCount] = useState(0); // Состояние для количества товаров в корзине
+    const [quantity, setQuantity] = useState(0); // Состояние для количества товаров в корзине
     
    /**
      * Увеличивает количество товаров в корзине на 1.
      */
     const addToCart = () => {
-        setCount(prevCount => prevCount + 1); // Увеличиваем количество товаров
+       setQuantity(prevQuantity => prevQuantity + 1); // Увеличиваем количество товаров
     };
 
     /**
@@ -34,7 +34,7 @@ export const CartProvider = ({ children }) => {
      * Количество не может быть меньше 0.
      */
     const removeFromCart = () => {
-        setCount(prevCount => Math.max(prevCount - 1, 0)); // Уменьшаем количество товаров, не меньше 0
+        setQuantity(prevQuantity => Math.max(prevQuantity - 1, 0)); // Уменьшаем количество товаров, не меньше 0
     };
     /**
          * Уменьшает количество товаров в корзине на указанное значение.
@@ -43,11 +43,11 @@ export const CartProvider = ({ children }) => {
          * @param {number} quantity - Количество товаров для удаления из корзины.
          */
     const deleteProduct = (quantity) => { // Переименовали clearProduct в deleteProduct
-        setCount(prevCount => Math.max(prevCount - quantity, 0));
+        setQuantity(prevQuantity => Math.max(prevQuantity - quantity, 0));
     };
 
     return (
-        <CartContext.Provider value={{ count, addToCart, removeFromCart, deleteProduct }}>
+        <CartContext.Provider value={{ quantity, addToCart, removeFromCart, deleteProduct }}>
             {children}
         </CartContext.Provider>
     );

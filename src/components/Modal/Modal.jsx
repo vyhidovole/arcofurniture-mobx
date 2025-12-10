@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react';
 import Image from "next/image";
+import { useTheme } from '@/context/ThemeContext';
 /**
  * Модальное окно для отображения схемы проезда.
  *
@@ -13,6 +14,7 @@ import Image from "next/image";
  
  */
 const Modal = ({ isOpen, onClose }) => {
+  const { isDarkMode } = useTheme(); // Получаем доступ к теме
   if (!isOpen) return null; // Если модальное окно закрыто, ничего не рендерим
 
   const handleClickOutside = (event) => {
@@ -25,7 +27,7 @@ const Modal = ({ isOpen, onClose }) => {
   useEffect(() => {
     // Добавляем обработчик события
     document.addEventListener('mousedown', handleClickOutside);
-    
+
     // Удаляем обработчик события при размонтировании
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -33,9 +35,9 @@ const Modal = ({ isOpen, onClose }) => {
   }, []); // Пустой массив зависимостей, чтобы эффект выполнялся только при монтировании и размонтировании
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-10">
+    <div className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-10 ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
       <div className="bg-white p-4 rounded shadow-lg w-3/4 h-5/6 flex flex-col">
-        
+
         {/* Заголовок модального окна */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-bold">Схема проезда</h2>
@@ -45,15 +47,16 @@ const Modal = ({ isOpen, onClose }) => {
             </svg>
           </button>
         </div>
-        
+
         <div className='flex justify-between'>
-          <h2>
-            Краснодар,<br/> Московская 144 <br />корпуc-1 <br />+7 961-525-91-91
-          </h2>
+          <h3>
+            Краснодар,<br /> Московская 144 <br />корпуc-1 <br />+7 961-525-91-91
+          </h3>
           {/* Добавляем изображение */}
           <Image
             src={"/images/route.jpg"}
-            width={808} height={100}
+            width={808}
+            height={100}
             alt="map"
             priority={true}
             className='object-cover overflow-hidden'

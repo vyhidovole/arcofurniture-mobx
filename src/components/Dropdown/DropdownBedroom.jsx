@@ -31,7 +31,7 @@ const DropdownBedroom = () => {
         <Link href="/bedroom" passHref>
           <MenuItem value="кровати">Кровати</MenuItem>
         </Link>
-        <MenuItem value="матрыцы">Матрацы</MenuItem>
+        <MenuItem value="матрацы">Матрацы</MenuItem>
         <MenuItem value="шкафы">Шкафы</MenuItem>
         <MenuItem value="комоды">Комоды</MenuItem>
         <MenuItem value="зеркала">Зеркала</MenuItem>

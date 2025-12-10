@@ -22,7 +22,7 @@ const MainLayout = ({children}) => {
     <main>
       <Navigation />
       <Header/>
-      <div className="container p-4 bg-slate-400">{children}</div>
+      <div className="container p-4">{children}</div>
       <Footer/>
     </main>
   );
