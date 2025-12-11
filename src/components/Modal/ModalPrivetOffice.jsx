@@ -4,7 +4,7 @@ import Alert from "../Alert/Alert";
 import useForm from "@/hooks/useForm";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-
+import { useTheme } from '@/context/ThemeContext';
 /**
  *  Окно для регистрации пользователя в Личном кабинете.
  *
@@ -24,6 +24,7 @@ import Button from "../Button/Button";
  */
 
 const ModalPrivetOffice = ({ setNewState }) => {
+    const { isDarkMode } = useTheme()
     const { formData, errors, handleChange, handleSubmit, resetForm } = useForm({
         name: "",
         email: "",
@@ -75,13 +76,13 @@ const ModalPrivetOffice = ({ setNewState }) => {
     };
     return (
         <form onSubmit={handleFormSubmit} method="dialog" >
-            <div className="${isDarkMode ? 'bg-gray-800' : 'bg-white'}p-4  shadow-lg w-72 h-96 flex flex-col mt-6 " >
+            <div className={`p-4  shadow-lg w-72 h-96 flex flex-col mt-6  ${isDarkMode ? 'bg-dark' : 'bg-light'}`}  >
                 {/* Заголовок Модального окна */}
                 <div className=" bottom-4 text-4xl ml-16">
                     <h1 className="font-bold ">Войти</h1>
                 </div>
                 <Input
-                    className={errors.name ? "border-red-500" : ""}
+                    className={`errors.name ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                     label="Name"
                     type="name"
                     name="name"
@@ -92,7 +93,7 @@ const ModalPrivetOffice = ({ setNewState }) => {
 
 
                 <Input
-                    className={errors.email ? "border-red-500" : ""}
+                    className={`errors.email ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                     label="Email"
                     type="email"
                     name="email"
@@ -101,7 +102,7 @@ const ModalPrivetOffice = ({ setNewState }) => {
                     error={errors.email}
                 />
                 <Input
-                    className={errors.password ? "border-red-500" : ""}
+                    className={`errors.password ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                     label="Password"
                     type="password"
                     name="password"
@@ -115,7 +116,6 @@ const ModalPrivetOffice = ({ setNewState }) => {
                 <Button
                     type="submit"
                     variant="secondary"
-                    className="mt-6"
                     isLoading={isLoading} // Передаём состояние загрузки
                 >Отправить
                 </Button>

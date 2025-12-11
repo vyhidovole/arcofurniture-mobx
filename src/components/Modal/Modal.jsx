@@ -35,8 +35,8 @@ const Modal = ({ isOpen, onClose }) => {
   }, []); // Пустой массив зависимостей, чтобы эффект выполнялся только при монтировании и размонтировании
 
   return (
-    <div className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-10 ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
-      <div className="bg-white p-4 rounded shadow-lg w-3/4 h-5/6 flex flex-col">
+    <div className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-10 `}>
+      <div className={`bg-white p-4 rounded shadow-lg w-3/4 h-5/6 flex flex-col ${isDarkMode ? 'bg-dark' : 'bg-light'}`}>
 
         {/* Заголовок модального окна */}
         <div className="flex justify-between items-center mb-4">
@@ -48,7 +48,7 @@ const Modal = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        <div className='flex justify-between'>
+        <div className={`flex justify-between `}>
           <h3>
             Краснодар,<br /> Московская 144 <br />корпуc-1 <br />+7 961-525-91-91
           </h3>

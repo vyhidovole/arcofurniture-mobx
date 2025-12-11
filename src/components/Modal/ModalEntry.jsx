@@ -137,7 +137,7 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
 
                         {/* Содержание Модального окна */}
                         <Input
-                            className={errors.name ? "border-red-500" : ""}
+                            className={`errors.name ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                             label="Name"
                             type="text"
                             name="name"
@@ -147,7 +147,7 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
                         />
 
                         <Input
-                            className={errors.email ? "border-red-500" : ""}
+                            className={`errors.email ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                             label="Email"
                             type="email"
                             name="email"
@@ -157,7 +157,7 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
                         />
 
                         <Input
-                            className={errors.password ? "border-red-500" : ""}
+                            className={`errors.password ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                             label="Password"
                             type="password"
                             name="password"
@@ -175,6 +175,7 @@ const ModalEntry = ({ show, onClose, setNewForm }) => {
                             variant="secondary"
                             disabled={!isFormValid} // Делаем кнопку недоступной, если форма не валидна
                             isLoading={isLoading} // Передаём состояние загрузки
+                            className={`${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                         >
                             Отправить
                         </Button>

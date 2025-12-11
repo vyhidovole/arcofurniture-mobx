@@ -3,7 +3,7 @@ import Alert from "../Alert/Alert";
 import useForm from "@/hooks/useForm";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-
+import { useTheme } from '@/context/ThemeContext';
 /**
  * Модальное окно для заказа звонка.
  *
@@ -29,6 +29,7 @@ import Button from "../Button/Button";
  */
 
 const ModalCall = ({ isOpen, onClose, setNewForm }) => {
+    const { isDarkMode } = useTheme(); // Получаем доступ к теме
     const { formData, errors, handleChange, handleSubmit, resetForm } = useForm(
         {
             name: "",
@@ -104,7 +105,7 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
         >
             <dialog ref={dialogRef} className="rounded-xl">
                 <form onSubmit={handleFormSubmit} method="dialog" >
-                    <div className="bg-white p-4  shadow-lg w-72 h-96 flex flex-col "
+                    <div className={` p-4  shadow-lg w-72 h-96 flex flex-col ${isDarkMode ? 'bg-dark' : 'bg-light'}`} 
                      onClick={(e) => e.stopPropagation()}>{/* Останавливаем всплытие клика на модалке */}
                         {/* Заголовок Модального окна */}
                         <div className="flex justify-between items-center bottom-4 ">
@@ -158,7 +159,7 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
                              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 mt-5"
                              /> */}
                             <Input
-                                className={errors.name ? "border-red-500" : ""}
+                                className={`errors.name ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                                 label="Name"
                                 type="text"
                                 name="name"
@@ -176,7 +177,7 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
                                 className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700 mt-5"
                             /> */}
                             <Input
-                                className={errors.phone ? "border-red-500" : ""}
+                                className={`errors.phone ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                                 label="Телефон"
                                 type="tel"
                                 name="phone"
@@ -190,7 +191,8 @@ const ModalCall = ({ isOpen, onClose, setNewForm }) => {
                             </button> */}
                             <Button
                                 type="submit"
-                                variant="secondary">
+                                variant="secondary"
+                                className="mt-6">
                                 Отправить
                             </Button>
 

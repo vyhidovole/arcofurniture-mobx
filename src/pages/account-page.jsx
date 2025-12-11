@@ -4,7 +4,7 @@ import Link from "next/link";
 import Alert from "@/components/Alert/Alert";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
-
+import { useTheme } from '@/context/ThemeContext';
 /**
  * Компонент для регистрации пользователя.
  * Позволяет пользователю вводить свои данные для создания аккаунта.
@@ -22,7 +22,7 @@ import Button from "@/components/Button/Button";
  */
 
 const Account = (setNewState) => {
-    
+    const {isDarkMode}=useTheme()
     const { formData, errors, handleChange, handleSubmit, resetForm } = useForm(
         { name: '', phone: '', email: "", password: '', confirmation: '' }, setNewState);
    
@@ -95,7 +95,7 @@ const Account = (setNewState) => {
                 <div className="inline-flex flex-col m-6">
                     
                     <Input
-                        className={errors.name ? "border-red-500" : ""}
+                        className={`errors.name ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                         label="Name"
                         type="text"
                         name="name"
@@ -107,7 +107,7 @@ const Account = (setNewState) => {
                 <div className="inline-flex flex-col m-6">
                    
                     <Input
-                        className={errors.phone ? "border-red-500" : ""}
+                        className={`errors.phone ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                         label="Телефон"
                         type="tel"
                         name="phone"
@@ -119,7 +119,7 @@ const Account = (setNewState) => {
                 <div className="inline-flex flex-col m-6">
                     
                     <Input
-                        className={errors.email ? "border-red-500" : ""}
+                        className={`errors.email ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                         label="Email"
                         type="email"
                         name="email"
@@ -131,7 +131,7 @@ const Account = (setNewState) => {
                 <div className="inline-flex flex-col m-6">
                    
                     <Input
-                        className={errors.password ? "border-red-500" : ""}
+                        className={`errors.password ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                         label="Password"
                         type="password"
                         name="password"
@@ -143,7 +143,7 @@ const Account = (setNewState) => {
                 <div className="inline-flex flex-col m-6">
                     
                         <Input
-                    className={errors.password ? "border-red-500" : ""}
+                    className={`errors.password ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                     label="Confirmation"
                     type="password"
                     name="confirmation"

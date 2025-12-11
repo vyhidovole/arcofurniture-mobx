@@ -4,7 +4,7 @@ import useForm from "@/hooks/useForm";
 import Alert from "@/components/Alert/Alert";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
-
+import { useTheme } from '@/context/ThemeContext';
 /**
  * Компонент для восстановления пароля.
  * Позволяет пользователю ввести свой адрес электронной почты для получения нового пароля.
@@ -18,7 +18,7 @@ import Button from "@/components/Button/Button";
  */
 
 const Password = (setNewState) => {
-
+    const { isDarkMode } = useTheme()
     const { formData, errors, handleChange, handleSubmit, resetForm } = useForm(
         { email: "", }, setNewState);
 
@@ -42,7 +42,7 @@ const Password = (setNewState) => {
         const isSuccess = await handleSubmit(e); // Предполагается, что handleSubmit возвращает true/false
 
         // Если форма успешно отправлена и нет ошибок
-         if(isSuccess) {
+        if (isSuccess) {
             localStorage.setItem('userData', JSON.stringify(formData));
 
             setShowAlert(true);
@@ -78,7 +78,7 @@ const Password = (setNewState) => {
     const handleCloseAlert = () => {
         setShowAlert(false);
     };
-    const isFormValid = Object.keys(errors).length === 0  && formData.email ;
+    const isFormValid = Object.keys(errors).length === 0 && formData.email;
 
     return (
         <>
@@ -97,15 +97,15 @@ const Password = (setNewState) => {
             >
                 {alertMessage}
             </Alert>
-
-            <form
+<div>
+ <form
                 onSubmit={handleFormSubmit}
                 method="dialog"
             >
                 <div className="inline-flex flex-col mt-6">
 
                     <Input
-                        className={errors.email ? "border-red-500" : ""}
+                        className={`w-52 mr-1 errors.email ? "border-red-500" : "" ${isDarkMode ? 'bg-dark' : 'bg-light'}`}
                         label="Email"
                         type="email"
                         name="email"
@@ -130,6 +130,8 @@ const Password = (setNewState) => {
 
             </form>
 
+</div>
+           
         </>
 
     );
